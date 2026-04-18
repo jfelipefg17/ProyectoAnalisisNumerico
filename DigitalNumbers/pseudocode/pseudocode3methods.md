@@ -154,9 +154,12 @@ Author: Jerónimo Mesa Alzate · April 2026
 - Intermediate matrices of the process
 
 **BEGIN**
-Check input dimensions: If A is not square (nxn) → Stop, and if b is not compatible with b (nx1) → Stop
-Check if the det(A) = 0 if it is → Stop 
-Chack if the number in the position A(1,1) = 0, if it is → Stop
+Check input dimensions: If A is not square (nxn) → Stop, and if b is not compatible with b (nx1) → Stop  
+
+Check if the det(A) = 0 if it is → Stop.  
+
+Chack if the number in the position A(1,1) = 0, if it is → Stop.  
+
 
 > Form thw augmented martix Aug = [A|b], then start the process of elimination:
 > For k = 1 to n-1:
