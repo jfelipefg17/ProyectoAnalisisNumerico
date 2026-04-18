@@ -161,7 +161,7 @@ Chack if the number in the position A(1,1) = 0, if it is → Stop.
 
 > Form the augmented martix Aug = [A|b], then start the process of elimination:  
 > For k = 1 to n-1:  
->    If Aug[k,k] = 0:  
+>   If Aug[k,k] = 0:  
 >     Stop: zero pivot encountered  
 >   For i = k+1 to n:  
 >     m_i = Aug[i,k] / Aug[k,k]  
