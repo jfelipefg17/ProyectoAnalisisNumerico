@@ -1,6 +1,6 @@
 import numpy as np
 
-def gaussian_elimination_TP(A, b, return_stages=False, tol=1e-12):
+def gaussian_elimination_TP(A, b, return_stages=True):
     """
     Solves the linear system Ax = b using Gaussian elimination with total pivoting.
 
@@ -8,11 +8,10 @@ def gaussian_elimination_TP(A, b, return_stages=False, tol=1e-12):
         A (array-like): Coefficient matrix (n x n)
         b (array-like): Right-hand side vector (n)
         return_stages (bool): If True, returns intermediate matrices
-        tol (float): Tolerance for zero checks
 
     Returns:
         x (numpy.ndarray): Solution vector (correctly reordered)
-        stages (optional): List of augmented matrices at each stage
+        stages: List of augmented matrices at each stage
     """
 
     # --- Convert to numpy arrays ---
@@ -28,6 +27,10 @@ def gaussian_elimination_TP(A, b, return_stages=False, tol=1e-12):
     if b.shape[0] != n:
         raise ValueError("Vector b size must match A")
 
+    # --- Determinant check ---
+    if np.linalg.det(A) = 0:
+        raise ValueError("Matrix A is not invertible")
+        
     # --- Build augmented matrix ---
     Aug = np.hstack((A, b.reshape(-1, 1)))
 
@@ -48,10 +51,6 @@ def gaussian_elimination_TP(A, b, return_stages=False, tol=1e-12):
         p = p_rel + k
         q = q_rel + k
 
-        # Check if pivot is zero
-        if abs(Aug[p, q]) < tol:
-            raise ValueError("Matrix is singular or nearly singular")
-
         # Swap rows
         if p != k:
             Aug[[k, p]] = Aug[[p, k]]
@@ -70,8 +69,8 @@ def gaussian_elimination_TP(A, b, return_stages=False, tol=1e-12):
             stages.append(Aug.copy())
 
     # --- Check last pivot ---
-    if abs(Aug[n - 1, n - 1]) < tol:
-        raise ValueError("Zero pivot encountered at last step")
+    if Aug[n - 1, n - 1] = 0:
+        raise ValueError("0 pivot encountered at last step")
 
     # --- Back substitution ---
     x = np.zeros(n)
