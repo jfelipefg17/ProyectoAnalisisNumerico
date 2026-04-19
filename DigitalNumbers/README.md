@@ -20,7 +20,7 @@ Team: Juan Felipe Florez · Jerónimo Mesa · Juan Guillermo Isaza · Luciana Pi
 
 DigitalNumbers is a web application that implements numerical methods studied in class.
 The Python code is organized by chapter and method, so each team member can work
-independently and later integrate their part without conflicts.
+independently and later integrate their part without conflicts. 
 
 **Chapters covered:**
 | Chapter | Topic                          | Owner              |
