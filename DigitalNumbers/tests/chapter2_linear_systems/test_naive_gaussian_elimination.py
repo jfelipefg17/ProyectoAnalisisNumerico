@@ -55,3 +55,15 @@ def print_results(label: str, x, stages):
 # Expected results:
 # x = [0.038495, -0.180227, -0.309711, 0.247594]
 # ──────────────────────────────────────────────
+A = np.array([
+    [2, -1, 0, 3],
+    [1, 0.5, 3, 8],
+    [0, 13, -2, 11],
+    [14, 5, -2, 3]
+], dtype=float)
+
+b = np.array([1, 1, 1, 1], dtype=float)
+
+x, stages = naive_gaussian_elimination(A, b, return_stages=True)
+
+print_results("Test : 4x4 System", x, stages)
