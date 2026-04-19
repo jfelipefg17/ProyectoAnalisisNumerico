@@ -26,7 +26,7 @@ independently and later integrate their part without conflicts.
 | Chapter | Topic                          | Owner              |
 |---------|--------------------------------|--------------------|
 | 1       | Single Variable Equations      | Juan Guillermo     |
-| 2       | Systems of Linear Equations    | *(assign)*         |
+| 2       | Systems of Linear Equations    | Jerónimo Mesa      |
 | 3       | Open methods                   | Juan Guillermo     |
 
 ---
@@ -45,10 +45,11 @@ DigitalNumbers/
 │   │   ├── bisection.py
 │   │   └── false_position.py
 │   │
-│   ├── chapter2_linear_systems/      ← Chapter 2 (add yours here)
+│   ├── chapter2_linear_systems/      ← Chapter 2 (Jerónimo Mesa)
 │   │   ├── __init__.py
-│   │   ├── gaussian_elimination.py   ← example
-│   │   └── ...
+│   │   ├── naive_gaussian_elimination.py  
+│   │   ├── gaussian_elimination_PP.py
+|   |   └── gaussian_elimination_TP.py
 │   │
 │   └── chapter3_open_methods/       ← Chapter 3 (Juan Guillermo)
 │       ├── __init__.py
@@ -64,8 +65,11 @@ DigitalNumbers/
 │   │   ├── test_bisection.py
 │   │   └── test_false_position.py
 │   │
-│   ├── chapter2_linear_systems/      ← add your tests here
-│   │   └── __init__.py
+│   ├── chapter2_linear_systems/      
+│   │   ├── __init__.py
+|   |   ├── test_naive_gaussian_elimination
+│   │   ├── test_gaussian_elimination_PP.py
+|   |   └── test_gaussian_elimination_TP.py
 │   │
 │   └── chapter3_open_methods/       ← add your tests here
 |       ├── test_newton.py
