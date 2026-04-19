@@ -1,4 +1,4 @@
-def fixed_point_method(g, x0, tol=1e-8, max_iter=100):
+def fixed_point_method(g, x0, tol=1e-7, max_iter=100):
     """
     Fixed Point Iteration Method for solving x = g(x)
 
