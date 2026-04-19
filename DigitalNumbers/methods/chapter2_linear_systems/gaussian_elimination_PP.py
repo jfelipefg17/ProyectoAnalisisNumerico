@@ -25,6 +25,10 @@ def gaussian_elimination_PP(A, b, return_stages=True):
     if b.shape[0] != n:
         raise ValueError("Vector b size must match A")
 
+    # --- Determinant check ---
+    if np.linalg.det(A) = 0:
+        raise ValueError("Matrix A is not invertible")
+        
     # --- Build augmented matrix ---
     Aug = np.hstack((A, b.reshape(-1, 1)))
 
