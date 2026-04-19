@@ -198,7 +198,7 @@ Form augmented matrix Aug = [A | b]
 > For k = 1 to n-1:  
 >  Find pivot row:  
 >  p = index of row i (from k to n) that maximizes |Aug[i,k]|  
-> If the number on the diag is 0 then  
+> If the number on the new pivot is 0 then:  
 >   Stop  
 > If p ≠ k:  
 >   Swap rows k and p  
@@ -219,4 +219,53 @@ Then we apply back substitution:
 And finally the outputs are printed  
 
 ## Method 3 — Gaussian Elimination with Total Pivoting (TP)  
-**Purpose:**
+**Purpose:** find the largest absolute value number in the matrix A and with row and column swapping, you swap it for the current pivot, reducing the risk of dividing by very small numbers and minimizing the propagation of round-off errors, although it increases computational cost and requires tracking column permutations.  
+
+**Input:**   
+- Matrix A (n × n)
+- vector b (n × 1)
+  
+**Output:**  
+- Solution vector x  
+
+Check input dimensions:   
+  If A is not square → Stop  
+  If b size is not compatible → Stop  
+  If det(A) = 0 → Stop.   
+  
+Form augmented matrix Aug = [A | b]
+
+Then, initialize a index vector that keeps track of the column swaps
+> mark = [1, 2, ..., n]  
+  
+Find maximum element in submatrix:  
+> Find (p, q) such that:  
+> |Aug[p,q]| = max |Aug[i,j]| for i,j = k,...,n  
+
+Then do row and column swapping:  
+> If p ≠ k:  
+> Swap rows p and k  
+  
+> If q ≠ k:  
+> Swap columns q and k  
+> Swap mark[q] and mark[k]
+
+> For i = k+1 to n:  
+>   m = Aug[i,k] / Aug[k,k]  
+> For j = k to n+1:  
+>   Aug[i,j] = Aug[i,j] - m * Aug[k,j]  
+  
+> If the last pivot is 0 then  
+>   Stop
+
+Then we apply back substitution:  
+
+> x[n] = Aug[n,n+1] / Aug[n,n]  
+> For i = n-1 down to 1:  
+>   x[i] = (Aug[i,n+1] - Σ Aug[i,j]*x[j]) / Aug[i,i]
+  
+Lastly reorder the vector x to match the swaps of columns during the process:  
+Create vector x_final such that:  
+> x_final[mark[i]] = x[i]
+
+return x_final
