@@ -202,7 +202,7 @@ Form augmented matrix Aug = [A | b]
 
 > If the number on the diag is 0 then  
 >   Stop  
-
+ 
 > If p ≠ k:  
 >   Swap rows k and p  
 
