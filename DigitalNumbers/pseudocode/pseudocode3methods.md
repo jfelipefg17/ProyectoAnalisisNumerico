@@ -196,16 +196,12 @@ Check input dimensions:
 Form augmented matrix Aug = [A | b]
 
 > For k = 1 to n-1:  
-> 
 >  Find pivot row:  
 >  p = index of row i (from k to n) that maximizes |Aug[i,k]|  
-
 > If the number on the diag is 0 then  
 >   Stop  
- 
 > If p ≠ k:  
 >   Swap rows k and p  
-
 > For i = k+1 to n:  
 >   m = Aug[i,k] / Aug[k,k]  
 > For j = k to n+1:  
@@ -222,4 +218,4 @@ Then we apply back substitution:
 
 And finally the outputs are printed  
 
-6. Return x
+
