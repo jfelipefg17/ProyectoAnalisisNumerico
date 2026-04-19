@@ -27,7 +27,7 @@ independently and later integrate their part without conflicts.
 |---------|--------------------------------|--------------------|
 | 1       | Single Variable Equations      | Juan Guillermo     |
 | 2       | Systems of Linear Equations    | *(assign)*         |
-| 3       | Interpolation                  | *(assign)*         |
+| 3       | Open methods                   | Juan Guillermo     |
 
 ---
 
@@ -52,7 +52,8 @@ DigitalNumbers/
 │   │
 │   └── chapter3_open_methods/       ← Chapter 3 (add yours here)
 │       ├── __init__.py
-│       └── ...
+│       ├── fixed_point.py
+|       └── newton.py
 │
 ├── tests/                            ← One test file per method
 │   ├── __init__.py
