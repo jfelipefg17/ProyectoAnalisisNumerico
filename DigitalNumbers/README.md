@@ -50,7 +50,7 @@ DigitalNumbers/
 │   │   ├── gaussian_elimination.py   ← example
 │   │   └── ...
 │   │
-│   └── chapter3_open_methods/       ← Chapter 3 (add yours here)
+│   └── chapter3_open_methods/       ← Chapter 3 (Juan Guillermo)
 │       ├── __init__.py
 │       ├── fixed_point.py
 |       └── newton.py
@@ -67,7 +67,9 @@ DigitalNumbers/
 │   ├── chapter2_linear_systems/      ← add your tests here
 │   │   └── __init__.py
 │   │
-│   └── chapter3_interpolation/       ← add your tests here
+│   └── chapter3_open_methods/       ← add your tests here
+|       ├── test_newton.py
+|       ├── test_fixed_point.py
 │       └── __init__.py
 │
 ├── requirements.txt
