@@ -178,8 +178,8 @@ Then we apply back substitution:
 And finally the outputs are printed  
 
 
-## Method 2 — Gaussian Elimination whit Partial Pivoting (PP)  
-**Purpose** Similar to naive gaussian elimination, this method utilises row changes to face the problem that the firts number could be too small compared to the other numbers leading to a not exact answer, also solves the problem of a number in the position [1,1] being a 0  
+## Method 2 — Gaussian Elimination with Partial Pivoting (PP)  
+**Purpose:** Similar to naive gaussian elimination, this method utilises row changes to face the problem that the firts number could be too small compared to the other numbers leading to a not exact answer, also solves the problem of a number in the position [1,1] being a 0  
 
 **Input:**   
 - Matrix A (n × n)
@@ -218,4 +218,5 @@ Then we apply back substitution:
 
 And finally the outputs are printed  
 
-
+## Method 3 — Gaussian Elimination with Total Pivoting (TP)  
+**Purpose:**
