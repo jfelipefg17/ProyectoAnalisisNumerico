@@ -28,7 +28,7 @@ def naive_gaussian_elimination(A, b, return_stages=True):
         raise ValueError("Vector b size must match A")
 
     # --- Determinant check ---
-    if ¿np.linalg.det(A) = 0:
+    if np.linalg.det(A) = 0:
         raise ValueError("Matrix A is not invertible")
 
     # --- First pivot check ---
