@@ -67,7 +67,7 @@ DigitalNumbers/
 │   │
 │   ├── chapter2_linear_systems/      
 │   │   ├── __init__.py
-|   |   ├── test_naive_gaussian_elimination
+|   |   ├── test_naive_gaussian_elimination.py
 │   │   ├── test_gaussian_elimination_PP.py
 |   |   └── test_gaussian_elimination_TP.py
 │   │
@@ -94,6 +94,9 @@ pip install -r requirements.txt
 python tests/chapter1_single_variable/test_bisection.py
 python tests/chapter1_single_variable/test_false_position.py
 python tests/chapter1_single_variable/test_incremental_search.py
+python tests/chapter2_linear_systems/test_naive_gaussian_elimination.py
+python tests/chapter2_linear_systems/test_gaussian_elimination_PP.py
+python tests/chapter2_linear_systems/test_gaussian_elimination_TP.py
 ```
 
 > **Important:** always run from the project root (`DigitalNumbers/`), not from inside a subfolder.
@@ -110,6 +113,14 @@ python tests/chapter1_single_variable/test_incremental_search.py
 | Incremental Search | `incremental_search.py` | `f, x0, h, n_max`             | `a, b, iters, table, found`          |
 | Bisection          | `bisection.py`          | `f, a, b, tol, n_max`         | `root, iters, error, table, converged` |
 | False Position     | `false_position.py`     | `f, a, b, tol, n_max`         | `root, iters, error, table, converged` |
+
+### Chapter 2 — Linear Systems  
+
+| Method             | File                    | Inputs                        | Outputs                              |
+|--------------------|-------------------------|-------------------------------|--------------------------------------|
+| naive gaussian elimination         | `naive_gaussian_elimination.py` | `A, b`             | `Stages, x`          |
+| gaussian elimination (Partial pivot)| `gaussian_elimination_PP.py`          | `A, b`         | `Stages, x` |
+| gaussian elimination (Total pivot) | `gaussian_elimination_TP.py`     | `A, b`         | `Stages, x_final` |
 
 All methods return a **dict** and a **pandas DataFrame table** with the iteration history.
 
