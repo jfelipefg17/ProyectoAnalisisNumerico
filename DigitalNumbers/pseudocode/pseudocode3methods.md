@@ -154,20 +154,26 @@ The approximate value of the root, or a message indicating that the method faile
 
 **BEGIN**
 
-Start with two initial approximations x0 and x1, and evaluate the function at both points.
+Start with two initial approximations x0 and x1.
+Evaluate f at both points.
 
-Repeat up to N times:
+Compute the first estimate using the secant formula based on x0 and x1.
 
-Construct a secant line using the two most recent points and compute a new approximation of the root as the intersection of this line with the x-axis.
+Evaluate f at this new estimate.
+Set the initial error to a large number so the loop starts.
 
-Evaluate the function at the new approximation.
+Repeat until the error is smaller than the tolerance or N iterations are reached:
 
-Check the difference between the new approximation and the previous one.
- If this difference is smaller than the given tolerance, stop and report the current approximation as the root.
+>Remember the previous approximation before updating it.
+>Compute a new approximation using the secant formula with the two most recent values.
+>Check that the denominator is not zero:
+> - If it is zero, stop - the method cannot proceed.
+>Evaluate f at the new approximation.
+>Calculate the error as the absolute difference between the new and previous approximations.
+>Update the values by discarding the oldest approximation and keeping the two most recent ones.
+>Increase the iteration counter by one.
 
-Otherwise, update the points by discarding the oldest value and keeping the two most recent approximations.
-
-If the method does not converge after N iterations, report that the method failed.
+Report the final approximation as the root.
 
 **END**
 
@@ -192,19 +198,26 @@ The approximate value of the root, or a message indicating that the method faile
 
 **BEGIN**
 
-Start with an initial approximation x0 , and evaluate the function and its first and second derivatives at that point.
+Start with an initial approximation x0.
+Evaluate f, f', and f'' at this point.
 
-Repeat up to N times:
+Compute the first estimate using the multiple roots formula.
 
-Use the modified formula to compute a new approximation of the root, taking into account the function and its derivatives.
+Evaluate f at this new estimate.
+Set the initial error to a large number so the loop starts.
 
-Evaluate the function at the new approximation.
+Repeat until the error is smaller than the tolerance or N iterations are reached:
 
-Check the difference between the new approximation and the previous one. If this difference is smaller than the given tolerance, stop and report the current approximation as the root.
+>Remember the current approximation before updating it.
+>Compute a new approximation using the multiple roots formula.
+>Check that the denominator is not zero:
+> - If it is zero, stop - the method cannot proceed.
+> Evaluate f, f', and f'' at the new approximation.
+>Calculate the error as the absolute difference between the new and previous approximations.
+>Update the approximation with the new value.
+>Increase the iteration counter by one.
 
-Otherwise, update the approximation by replacing the previous value with the new one.
-
-If the method does not converge after N iterations, report that the method failed.
+Report the fina approximation as the root.
 
 **END**
 
