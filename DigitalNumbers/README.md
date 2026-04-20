@@ -384,7 +384,7 @@ print_results("Test : nxn System", x, stages)
 ```
 ### Step 4 — Check the output format
 
-#### Chapter 1 single variables  
+### Chapter — 1 single variables  
 
 The professor requires that every method prints a table. Make sure your table has:
 - An `"Iteration"` column as the first column
@@ -393,6 +393,12 @@ The professor requires that every method prints a table. Make sure your table ha
 
 ---
 
+### Chapter 2 — Linear Systems
+
+The professor requires that every method prints the stages of the elimination process and the result vector x. 
+- Every Stage must have the augmented matrix where you can clearly see the process step by step
+
+---
 ## 6. Output Format (Required by the Professor)
 
 Every test must print output like this:
