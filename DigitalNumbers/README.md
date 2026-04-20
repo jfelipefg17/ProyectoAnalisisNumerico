@@ -148,22 +148,26 @@ Last updated: April 2026
 import numpy as np
 import pandas as pd
 
-
 def your_method(param1, param2, tol: float, n_max: int) -> dict:
     """
     Short description.
 
     Parameters
     ----------
-    Matrix A
-    Vector b
+    param1 : type — description
+    param2 : type — description
+    tol    : float — error tolerance
+    n_max  : int   — maximum iterations
 
     Returns
     -------
-    Steges of the elimination process
-    Vactor x with results
+    dict with keys:
+        'root'      : float        — approximated solution
+        'iters'     : int          — iterations performed
+        'error'     : float        — final error
+        'table'     : pd.DataFrame — iteration table
+        'converged' : bool         — True if tolerance was met
     """
-
     rows = []
 
     # --- Initialization ---
@@ -209,25 +213,20 @@ Last updated: April 2026
 
 import numpy as np
 
-def your_method(Matriz A, vector b, stages = boolean) -> dict:
+def your_method(matrix A, vector b, stages = boolean) -> dict:
     """
     Short description.
 
     Parameters
     ----------
-    param1 : type — description
-    param2 : type — description
-    tol    : float — error tolerance
-    n_max  : int   — maximum iterations
+    Matrix A
+    Vector b
+    
 
     Returns
     -------
-    dict with keys:
-        'root'      : float        — approximated solution
-        'iters'     : int          — iterations performed
-        'error'     : float        — final error
-        'table'     : pd.DataFrame — iteration table
-        'converged' : bool         — True if tolerance was met
+    Steges of the elimination process
+    Vactor x with results
     """
 ```
 
