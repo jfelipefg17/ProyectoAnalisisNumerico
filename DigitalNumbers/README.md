@@ -282,6 +282,7 @@ from .chapterX_your_topic import your_method
 
 Create `tests/chapterX_your_topic/test_your_method.py` using this template:
 
+### Chapter 1 — single variable
 ```python
 """
 Test — Method Name
@@ -319,7 +320,24 @@ f2 = lambda x: ...
 result2 = your_method(f=f2, ...)
 print_results("Test 2: f(x) = ...  |  params", result2)
 ```
+### chapter 2 — Linear systems
 
+```python
+"""
+Test — Method Name
+===================
+To run:
+    python tests/chapterX_your_topic/test_your_method.py
+"""
+
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+import numpy as np
+from methods.chapterX_your_topic.your_method import your_method
+
+
+```
 ### Step 4 — Check the output format
 
 The professor requires that every method prints a table. Make sure your table has:
