@@ -234,6 +234,15 @@ def your_method(matrix A, vector b, stages = boolean) -> dict:
 
     # --- Augmented matrix ---
 
+    # --- Forward elimination ---
+    for k in range(n - 1):
+
+       # ... Check for a non 0 pivot ...
+
+        for i in range(k + 1, n):
+            m = Aug[i, k] / Aug[k, k]
+            Aug[i, k:n+1] = Aug[i, k:n+1] - m * Aug[k, k:n+1]
+
 
 ```
 
