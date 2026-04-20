@@ -135,6 +135,81 @@ Report the final estimate p as the approximation of the root.
 
 **END**
 
+---
+
+## Method 7 - Secant 
+
+**Purpose:** Approximate a root of a nonlinear function by using two initial guesses and constructing successive linear approximations, without requiring the computation of derivatives.
+
+**Inputs:**
+- f — a continuous function
+- x0, x1 — two initial approximations to the root
+- tol — tolerance that determines when the approximation is accurate enough
+- N — maximum number of iterations allowed
+
+**Output:**
+The approximate value of the root, or a message indicating that the method failed to converge within the maximum number of iterations.
+
+---
+
+**BEGIN**
+
+Start with two initial approximations x0 and x1, and evaluate the function at both points.
+
+Repeat up to N times:
+
+Construct a secant line using the two most recent points and compute a new approximation of the root as the intersection of this line with the x-axis.
+
+Evaluate the function at the new approximation.
+
+Check the difference between the new approximation and the previous one.
+ If this difference is smaller than the given tolerance, stop and report the current approximation as the root.
+
+Otherwise, update the points by discarding the oldest value and keeping the two most recent approximations.
+
+If the method does not converge after N iterations, report that the method failed.
+
+**END**
+
+---
+
+## Method 8 - Multiple Roots 
+
+**Purpose:** Approximate a root of a nonlinear function with multiplicity greater than one by modifying the Newton method to improve convergence.
+
+**Inputs:**
+f — a continuous function
+f′ — first derivative of the function
+f″ — second derivative of the function
+x0 — initial approximation to the root
+tol — tolerance that determines when the approximation is accurate enough
+N — maximum number of iterations allowed
+
+**Output:**
+The approximate value of the root, or a message indicating that the method failed to converge within the maximum number of iterations.
+
+---
+
+**BEGIN**
+
+Start with an initial approximation x0 , and evaluate the function and its first and second derivatives at that point.
+
+Repeat up to N times:
+
+Use the modified formula to compute a new approximation of the root, taking into account the function and its derivatives.
+
+Evaluate the function at the new approximation.
+
+Check the difference between the new approximation and the previous one. If this difference is smaller than the given tolerance, stop and report the current approximation as the root.
+
+Otherwise, update the approximation by replacing the previous value with the new one.
+
+If the method does not converge after N iterations, report that the method failed.
+
+**END**
+
+---
+
 # Pseudocode — Chapter 2: Linear Systems
 **DigitalNumbers Project · EAFIT University**
 Author: Jerónimo Mesa Alzate · April 2026
