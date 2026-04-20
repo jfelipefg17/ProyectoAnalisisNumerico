@@ -401,6 +401,7 @@ The professor requires that every method prints the stages of the elimination pr
 ---
 ## 6. Output Format (Required by the Professor)
 
+### Chapter 1 — Single variable
 Every test must print output like this:
 
 ```
@@ -418,10 +419,52 @@ Every test must print output like this:
   Error      : 8.94e-08
   Status     : Converged ✓
 ```
-
 Use `result["table"].to_string(index=False)` to print the table — do not use `print(df)` alone
-because it truncates rows.
+because it truncates rows.  
 
+### Chapter 2 — Linear systems
+Every test must print output like this:
+
+```
+Resultados:
+
+Etapa 0
+
+ 2.000000  -1.000000  0.000000  3.000000  1.000000 
+ 1.000000  0.500000  3.000000  8.000000  1.000000 
+ 0.000000  13.000000  -2.000000  11.000000  1.000000 
+ 14.000000  5.000000  -2.000000  3.000000  1.000000 
+
+Etapa 1
+
+ 2.000000  -1.000000  0.000000  3.000000  1.000000 
+ 0.000000  1.000000  3.000000  6.500000  0.500000 
+ 0.000000  13.000000  -2.000000  11.000000  1.000000 
+ 0.000000  12.000000  -2.000000  -18.000000  -6.000000 
+
+Etapa 2
+
+ 2.000000  -1.000000  0.000000  3.000000  1.000000 
+ 0.000000  1.000000  3.000000  6.500000  0.500000 
+ 0.000000  0.000000  -41.000000  -73.500000  -5.500000 
+ 0.000000  0.000000  -38.000000  -96.000000  -12.000000 
+
+Etapa 3
+
+ 2.000000  -1.000000  0.000000  3.000000  1.000000 
+ 0.000000  1.000000  3.000000  6.500000  0.500000 
+ 0.000000  0.000000  -41.000000  -73.500000  -5.500000 
+ 0.000000  0.000000  0.000000  -27.878049  -6.902439 
+
+
+Después de aplicar sustitución regresiva
+
+x:
+0.038495
+-0.180227
+-0.309711
+0.247594
+```
 ---
 
 ## 7. Coding Standards
