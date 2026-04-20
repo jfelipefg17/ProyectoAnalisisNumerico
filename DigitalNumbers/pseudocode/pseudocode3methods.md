@@ -210,15 +210,16 @@ Set the initial error to a large number so the loop starts.
 
 Repeat until the error is smaller than the tolerance or N iterations are reached:
 
->Remember the current approximation before updating it.
+>Remember the current approximation before updating it.  
 >Compute a new approximation using the multiple roots formula.
+>
 >Check that the denominator is not zero:
 > - If it is zero, stop - the method cannot proceed.
 >   
->Evaluate f, f', and f'' at the new approximation.
->Calculate the error as the absolute difference between the new and previous approximations.
->Update the approximation with the new value.
->Increase the iteration counter by one.
+>Evaluate f, f', and f'' at the new approximation.  
+>Calculate the error as the absolute difference between the new and previous approximations.  
+>Update the approximation with the new value.  
+>Increase the iteration counter by one.  
 
 Report the fina approximation as the root.
 
