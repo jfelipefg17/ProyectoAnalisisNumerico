@@ -364,9 +364,27 @@ def print_results(label: str, x, stages):
 
     print()
 
+# ──────────────────────────────────────────────
+# Test x
+#  # Matrix A
+#
+#  # Vector b
+# Expected results:
+#
+# # vector x
+# ──────────────────────────────────────────────
 
+# Matriz A
+
+# Vactor b
+
+x, stages = #name of method (A, b, return_stages=True)
+
+print_results("Test : nxn System", x, stages)
 ```
 ### Step 4 — Check the output format
+
+#### Chapter 1 single variables  
 
 The professor requires that every method prints a table. Make sure your table has:
 - An `"Iteration"` column as the first column
