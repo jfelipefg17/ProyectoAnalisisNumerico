@@ -44,8 +44,8 @@ DigitalNumbers/
 │   │   ├── incremental_search.py
 │   │   ├── bisection.py
 │   │   ├── false_position.py
-│   │   ├──
-│   │   ├──
+|       ├── test_newton.py
+|       ├── test_fixed_point.py
 │   │   ├── 
 │   │   └──
 │   │
@@ -55,10 +55,7 @@ DigitalNumbers/
 │   │   ├── gaussian_elimination_PP.py
 |   |   └── gaussian_elimination_TP.py
 │   │
-│   └── chapter3_open_methods/       ← Chapter 3 (Juan Guillermo)
-│       ├── __init__.py
-│       ├── fixed_point.py
-|       └── newton.py
+│   └── chapter3_/       ← Chapter 3 
 │
 ├── tests/                            ← One test file per method
 │   ├── __init__.py
@@ -68,8 +65,8 @@ DigitalNumbers/
 │   │   ├── test_incremental_search.py
 │   │   ├── test_bisection.py
 │   │   ├── test_false_position.py
-│   │   ├──
-│   │   ├──
+|       ├── test_newton.py
+|       ├── test_fixed_point.py
 │   │   ├── 
 │   │   └──
 │   │
@@ -79,10 +76,7 @@ DigitalNumbers/
 │   │   ├── test_gaussian_elimination_PP.py
 |   |   └── test_gaussian_elimination_TP.py
 │   │
-│   └── chapter3_open_methods/       ← add your tests here
-|       ├── test_newton.py
-|       ├── test_fixed_point.py
-│       └── __init__.py
+│   └── chapter3_/       ← add your tests here
 │
 ├── requirements.txt
 └── README.md
