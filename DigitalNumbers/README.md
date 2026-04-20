@@ -229,7 +229,12 @@ def your_method(matrix A, vector b, stages = boolean) -> dict:
     Vactor x with results
     """
 
-    
+    # --- Input Validations ---
+    # ... validations here ...
+
+    # --- Augmented matrix ---
+
+
 ```
 
 ### Step 2 — Register it in `__init__.py`
