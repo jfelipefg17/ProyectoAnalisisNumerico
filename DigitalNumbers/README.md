@@ -25,9 +25,10 @@ independently and later integrate their part without conflicts.
 **Chapters covered:**
 | Chapter | Topic                          | Owner              |
 |---------|--------------------------------|--------------------|
-| 1       | Single Variable Equations      | Juan Guillermo     |
+| 1       | Single Variable Equations      | Felipe Florez,     |
+|         |                                | Luciana Pineda     |
+|         |                                | Juan Guillermo Isaza|
 | 2       | Systems of Linear Equations    | Jerónimo Mesa      |
-| 3       | Open methods                   | Juan Guillermo     |
 
 ---
 
@@ -46,8 +47,8 @@ DigitalNumbers/
 │   │   ├── false_position.py
 |       ├── test_newton.py
 |       ├── test_fixed_point.py
-│   │   ├── 
-│   │   └──
+│   │   ├── secant.py
+│   │   └── multiple_roots.py
 │   │
 │   ├── chapter2_linear_systems/      ← Chapter 2 (Jerónimo Mesa)
 │   │   ├── __init__.py
@@ -67,8 +68,8 @@ DigitalNumbers/
 │   │   ├── test_false_position.py
 |       ├── test_newton.py
 |       ├── test_fixed_point.py
-│   │   ├── 
-│   │   └──
+│   │   ├── test_secant.py
+│   │   └── test_multiple_roots.py
 │   │
 │   ├── chapter2_linear_systems/      
 │   │   ├── __init__.py
