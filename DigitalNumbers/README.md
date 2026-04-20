@@ -114,11 +114,13 @@ python tests/chapter2_linear_systems/test_gaussian_elimination_TP.py
 
 ### Chapter 1 — Single Variable Equations
 
-| Method             | File                    | Inputs                        | Outputs                              |
-|--------------------|-------------------------|-------------------------------|--------------------------------------|
-| Incremental Search | `incremental_search.py` | `f, x0, h, n_max`             | `a, b, iters, table, found`          |
+| Method             | File                    | Inputs                        | Outputs                                |
+|--------------------|-------------------------|-------------------------------|----------------------------------------|
+| Incremental Search | `incremental_search.py` | `f, x0, h, n_max`             | `a, b, iters, table, found`            |
 | Bisection          | `bisection.py`          | `f, a, b, tol, n_max`         | `root, iters, error, table, converged` |
 | False Position     | `false_position.py`     | `f, a, b, tol, n_max`         | `root, iters, error, table, converged` |
+| Newton-Raphson     | `newton.py`             | `f, df, x0, tol, n_max`       | `root, iters, error, table, converged` |
+| Fixed Point        | `fixed_point.py`        | `g, x0, tol, n_max`           | `root, iters, error, table, converged` |
 
 All methods return a **dict** and a **pandas DataFrame table** with the iteration history.
 
