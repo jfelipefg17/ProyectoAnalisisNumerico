@@ -213,7 +213,7 @@ def your_method(param1, param2, tol: float, n_max: int) -> dict:
 ```
 ### Chapter 2 — Linear Systems
 
-```
+```python
 """
 Method Name
 ===========
