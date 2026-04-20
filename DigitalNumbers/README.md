@@ -43,7 +43,11 @@ DigitalNumbers/
 │   │   ├── __init__.py
 │   │   ├── incremental_search.py
 │   │   ├── bisection.py
-│   │   └── false_position.py
+│   │   ├── false_position.py
+│   │   ├──
+│   │   ├──
+│   │   ├── 
+│   │   └──
 │   │
 │   ├── chapter2_linear_systems/      ← Chapter 2 (Jerónimo Mesa)
 │   │   ├── __init__.py
@@ -63,7 +67,11 @@ DigitalNumbers/
 │   │   ├── __init__.py
 │   │   ├── test_incremental_search.py
 │   │   ├── test_bisection.py
-│   │   └── test_false_position.py
+│   │   ├── test_false_position.py
+│   │   ├──
+│   │   ├──
+│   │   ├── 
+│   │   └──
 │   │
 │   ├── chapter2_linear_systems/      
 │   │   ├── __init__.py
@@ -94,6 +102,10 @@ pip install -r requirements.txt
 python tests/chapter1_single_variable/test_bisection.py
 python tests/chapter1_single_variable/test_false_position.py
 python tests/chapter1_single_variable/test_incremental_search.py
+
+
+
+
 python tests/chapter2_linear_systems/test_naive_gaussian_elimination.py
 python tests/chapter2_linear_systems/test_gaussian_elimination_PP.py
 python tests/chapter2_linear_systems/test_gaussian_elimination_TP.py
