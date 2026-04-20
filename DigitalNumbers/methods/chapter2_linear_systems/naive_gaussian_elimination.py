@@ -45,7 +45,7 @@ def naive_gaussian_elimination(A, b, return_stages=True):
     # --- Forward elimination ---
     for k in range(n - 1):
 
-        if Aug[k, k] = 0:
+        if Aug[k, k] == 0:
             raise ValueError(f"Zero pivot encountered at step {k}")
 
         for i in range(k + 1, n):
