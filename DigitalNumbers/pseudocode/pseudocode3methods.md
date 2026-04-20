@@ -168,6 +168,7 @@ Repeat until the error is smaller than the tolerance or N iterations are reached
 >Compute a new approximation using the secant formula with the two most recent values.
 >Check that the denominator is not zero:
 > - If it is zero, stop - the method cannot proceed.
+>
 >Evaluate f at the new approximation.
 >Calculate the error as the absolute difference between the new and previous approximations.
 >Update the values by discarding the oldest approximation and keeping the two most recent ones.
@@ -212,7 +213,8 @@ Repeat until the error is smaller than the tolerance or N iterations are reached
 >Compute a new approximation using the multiple roots formula.
 >Check that the denominator is not zero:
 > - If it is zero, stop - the method cannot proceed.
-> Evaluate f, f', and f'' at the new approximation.
+>   
+>Evaluate f, f', and f'' at the new approximation.
 >Calculate the error as the absolute difference between the new and previous approximations.
 >Update the approximation with the new value.
 >Increase the iteration counter by one.
