@@ -18,4 +18,4 @@ for k in range(1, N+1):
   x1 = x2
 
 print("El método no convergió")
-return 2
+return x2
