@@ -1,0 +1,23 @@
+name: Run Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install numpy pandas
+
+    - name: Run tests
+      run: |
+        python tests/chapter1_single_variable/test_secant.py
+        python tests/chapter1_single_variable/test_multiple_roots.py
