@@ -155,19 +155,13 @@ def your_method(param1, param2, tol: float, n_max: int) -> dict:
 
     Parameters
     ----------
-    param1 : type — description
-    param2 : type — description
-    tol    : float — error tolerance
-    n_max  : int   — maximum iterations
+    Matrix A
+    Vector b
 
     Returns
     -------
-    dict with keys:
-        'root'      : float        — approximated solution
-        'iters'     : int          — iterations performed
-        'error'     : float        — final error
-        'table'     : pd.DataFrame — iteration table
-        'converged' : bool         — True if tolerance was met
+    Steges of the elimination process
+    Vactor x with results
     """
 
     rows = []
