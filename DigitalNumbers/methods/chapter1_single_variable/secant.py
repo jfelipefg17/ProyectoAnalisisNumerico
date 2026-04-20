@@ -17,11 +17,11 @@ def secant(f, x0, x1, tol, N):
         x2 = x1 - f(x1)*(x1 - x0)/(f(x1) - f(x0))
         error = abs(x2 - x1)
 
-        data.append([k, x0, x1, x2, f(x2), error])
+        data.append([k, x2, f(x2), error])
 
         if error < tol:
             return {
-                "table": pd.DataFrame(data, columns=["k","x0","x1","x2","f(x2)","error"]),
+                "table": pd.DataFrame(data, columns=["iter","xi","f(xi)","error"]),
                 "iters": k,
                 "root": x2,
                 "error": error,
@@ -32,7 +32,7 @@ def secant(f, x0, x1, tol, N):
         x1 = x2
 
     return {
-        "table": pd.DataFrame(data, columns=["k","x0","x1","x2","f(x2)","error"]),
+        "table": pd.DataFrame(data, columns=["iter","xi","f(xi)","error"],
         "iters": N,
         "root": x2,
         "error": error,
