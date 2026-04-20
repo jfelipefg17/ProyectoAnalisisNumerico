@@ -130,6 +130,7 @@ All methods return a **dict** and a **pandas DataFrame table** with the iteratio
 
 Follow these steps exactly so everything integrates cleanly.
 
+### Chapter 1 — Single variable
 ### Step 1 — Create your method file
 
 Create `methods/chapterX_your_topic/your_method.py` using this template:
@@ -199,6 +200,41 @@ def your_method(param1, param2, tol: float, n_max: int) -> dict:
         "table":     table,
         "converged": error <= tol,
     }
+```
+### Chapter 2 — Linear Systems
+
+```
+"""
+Method Name
+===========
+One-paragraph explanation of what the method does and when to use it.
+
+Author: Your Name
+Last updated: April 2026
+"""
+
+import numpy as np
+
+def your_method(Matriz A, vector b, stages = boolean) -> dict:
+    """
+    Short description.
+
+    Parameters
+    ----------
+    param1 : type — description
+    param2 : type — description
+    tol    : float — error tolerance
+    n_max  : int   — maximum iterations
+
+    Returns
+    -------
+    dict with keys:
+        'root'      : float        — approximated solution
+        'iters'     : int          — iterations performed
+        'error'     : float        — final error
+        'table'     : pd.DataFrame — iteration table
+        'converged' : bool         — True if tolerance was met
+    """
 ```
 
 ### Step 2 — Register it in `__init__.py`
