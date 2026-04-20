@@ -137,7 +137,7 @@ Report the final estimate p as the approximation of the root.
 
 ---
 
-## Method 7 - Secant 
+## Method 6 - Secant 
 
 **Purpose:** Approximate a root of a nonlinear function by using two initial guesses and constructing successive linear approximations, without requiring the computation of derivatives.
 
@@ -173,7 +173,7 @@ If the method does not converge after N iterations, report that the method faile
 
 ---
 
-## Method 8 - Multiple Roots 
+## Method 7 - Multiple Roots 
 
 **Purpose:** Approximate a root of a nonlinear function with multiplicity greater than one by modifying the Newton method to improve convergence.
 
