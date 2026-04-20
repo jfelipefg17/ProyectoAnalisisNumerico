@@ -32,7 +32,7 @@ def secant(f, x0, x1, tol, N):
         x1 = x2
 
     return {
-        "table": pd.DataFrame(data, columns=["iter","xi","f(xi)","error"],
+        "table": pd.DataFrame(data, columns=["iter","xi","f(xi)","error"]),
         "iters": N,
         "root": x2,
         "error": error,
