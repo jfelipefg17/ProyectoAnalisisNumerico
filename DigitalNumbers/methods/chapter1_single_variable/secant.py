@@ -1,40 +1,93 @@
-def secant(f, x0, x1, tol, N):
-    import pandas as pd
+"""
+Secant Method
+=============
+Finds a root of f(x) = 0 using two initial approximations to build
+successive linear interpolations, without needing the derivative.
+Converges superlinearly (order ≈ 1.618).
 
-    data = []
-    error = float("inf")
+Formula: x_{n+1} = x_n - f(x_n) * (x_n - x_{n-1}) / (f(x_n) - f(x_{n-1}))
 
-    for k in range(1, N+1):
-        if f(x1) - f(x0) == 0:
+Author: Juan Felipe Florez Giraldo
+Last updated: April 2026
+"""
+
+import pandas as pd
+
+
+def secant(f, x0: float, x1: float, tol: float, n_max: int) -> dict:
+    """
+    Secant method to find a root of f(x) = 0.
+
+    Parameters
+    ----------
+    f     : callable — continuous function f(x)
+    x0    : float    — first initial approximation
+    x1    : float    — second initial approximation
+    tol   : float    — error tolerance (stopping criterion)
+    n_max : int      — maximum number of iterations
+
+    Returns
+    -------
+    dict with keys:
+        'root'      : float        — approximated root
+        'iters'     : int          — number of iterations performed
+        'error'     : float        — final absolute error
+        'table'     : pd.DataFrame — iteration table
+        'converged' : bool         — True if tolerance was reached
+
+    Table columns
+    -------------
+    iter   : iteration number (0 and 1 = initial guesses)
+    xi     : current approximation      (10 decimal places)
+    f(xi)  : f evaluated at xi          (scientific notation)
+    E      : absolute error |xi - xi_prev| (scientific notation, blank for iter 0-1)
+    """
+
+    rows = []
+
+    # Rows 0 and 1 — initial guesses (no error yet)
+    rows.append({"iter": 0, "xi": x0, "f(xi)": f(x0), "E": None})
+    rows.append({"iter": 1, "xi": x1, "f(xi)": f(x1), "E": None})
+
+    E = None
+
+    for i in range(2, n_max + 2):
+
+        f_x0  = f(x0)
+        f_x1  = f(x1)
+        denom = f_x1 - f_x0
+
+        if denom == 0:
+            raise ValueError(
+                f"f(x1) - f(x0) = 0 at iteration {i}. Method cannot proceed."
+            )
+
+        x2 = x1 - f_x1 * (x1 - x0) / denom
+        E  = abs(x2 - x1)
+
+        rows.append({
+            "iter":  i,
+            "xi":    x2,
+            "f(xi)": f(x2),
+            "E":     E,
+        })
+
+        if E < tol:
             return {
-                "table": pd.DataFrame(data),
-                "iters": k,
-                "root": x1,
-                "error": error,
-                "converged": False
-            }
-
-        x2 = x1 - f(x1)*(x1 - x0)/(f(x1) - f(x0))
-        error = abs(x2 - x1)
-
-        data.append([k, x2, f(x2), error])
-
-        if error < tol:
-            return {
-                "table": pd.DataFrame(data, columns=["iter","xi","f(xi)","error"]),
-                "iters": k,
-                "root": x2,
-                "error": error,
-                "converged": True
+                "root":      x2,
+                "iters":     i,
+                "error":     E,
+                "table":     pd.DataFrame(rows),
+                "converged": True,
             }
 
         x0 = x1
         x1 = x2
 
     return {
-        "table": pd.DataFrame(data, columns=["iter","xi","f(xi)","error"]),
-        "iters": N,
-        "root": x2,
-        "error": error,
-        "converged": False
+        "root":      x1,
+        "iters":     n_max,
+        "error":     E,
+        "table":     pd.DataFrame(rows),
+        "converged": False,
     }

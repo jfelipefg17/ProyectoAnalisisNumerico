@@ -1,34 +1,32 @@
 # DigitalNumbers — Numerical Analysis Project
-**EAFIT University · Department of Computer Science and Systems**  
-Course: Numerical Analysis · Instructor: Edwar Samir Posada  
+**EAFIT University · Department of Computer Science and Systems**
+Course: Numerical Analysis · Instructor: Edwar Samir Posada
 Team: Juan Felipe Florez · Jerónimo Mesa · Juan Guillermo Isaza · Luciana Pineda
+Repository: https://github.com/jfelipefg17/ProyectoAnalisisNumerico
 
 ---
 
 ## Table of Contents
 1. [Project Overview](#1-project-overview)
 2. [Project Structure](#2-project-structure)
-3. [How to Run](#3-how-to-run)
-4. [Methods Implemented](#4-methods-implemented)
-5. [Pattern: How to Add Your Methods](#5-pattern-how-to-add-your-methods)
-6. [Output Format (Required by the Professor)](#6-output-format-required-by-the-professor)
+3. [Setup — Step by Step](#3-setup--step-by-step)
+4. [How to Run Every Test](#4-how-to-run-every-test)
+5. [Methods and Test Inputs](#5-methods-and-test-inputs)
+6. [How to Add Your Methods](#6-how-to-add-your-methods)
 7. [Coding Standards](#7-coding-standards)
 
 ---
 
 ## 1. Project Overview
 
-DigitalNumbers is a web application that implements numerical methods studied in class.
-The Python code is organized by chapter and method, so each team member can work
-independently and later integrate their part without conflicts. 
+DigitalNumbers is a web application that implements the numerical methods studied in class.
+The Python code is organized by chapter so each team member works independently without conflicts.
 
-**Chapters covered:**
-| Chapter | Topic                          | Owner              |
-|---------|--------------------------------|--------------------|
-| 1       | Single Variable Equations      | Felipe Florez,     |
-|         |                                | Luciana Pineda     |
-|         |                                | Juan Guillermo Isaza|
-| 2       | Systems of Linear Equations    | Jerónimo Mesa      |
+| Chapter | Topic                         | Owner                                                   |
+|---------|-------------------------------|---------------------------------------------------------|
+| 1       | Single Variable Equations     | Juan Guillermo Isaza · Juan Felipe Florez · Luciana Pineda |
+| 2       | Linear Systems                | Jerónimo Mesa Alzate                                    |
+| 3       | Open Methods                  | Juan Felipe Florez · Luciana Pineda                     |
 
 ---
 
@@ -37,441 +35,246 @@ independently and later integrate their part without conflicts.
 ```
 DigitalNumbers/
 │
-├── methods/                          ← All numerical method implementations
+├── methods/
 │   ├── __init__.py
-│   │
-│   ├── chapter1_single_variable/     ← Chapter 1 (Juan Guillermo)
+│   ├── chapter1_single_variable/
 │   │   ├── __init__.py
 │   │   ├── incremental_search.py
 │   │   ├── bisection.py
 │   │   ├── false_position.py
-|       ├── test_newton.py
-|       ├── test_fixed_point.py
+│   │   ├── newton.py
+│   │   ├── fixed_point.py
 │   │   ├── secant.py
 │   │   └── multiple_roots.py
-│   │
-│   ├── chapter2_linear_systems/      ← Chapter 2 (Jerónimo Mesa)
+│   ├── chapter2_linear_systems/
 │   │   ├── __init__.py
-│   │   ├── naive_gaussian_elimination.py  
+│   │   ├── naive_gaussian_elimination.py
 │   │   ├── gaussian_elimination_PP.py
-|   |   └── gaussian_elimination_TP.py
-│   │
-│   └── chapter3_/       ← Chapter 3 
+│   │   └── gaussian_elimination_TP.py
+│   └── chapter3_open_methods/
+│       └── __init__.py
 │
-├── tests/                            ← One test file per method
-│   ├── __init__.py
-│   │
+├── tests/
+│   ├── print_helpers.py                    ← shared print utilities
 │   ├── chapter1_single_variable/
-│   │   ├── __init__.py
 │   │   ├── test_incremental_search.py
 │   │   ├── test_bisection.py
 │   │   ├── test_false_position.py
-|       ├── test_newton.py
-|       ├── test_fixed_point.py
+│   │   ├── test_newton.py
+│   │   ├── test_fixed_point.py
 │   │   ├── test_secant.py
 │   │   └── test_multiple_roots.py
-│   │
-│   ├── chapter2_linear_systems/      
-│   │   ├── __init__.py
-|   |   ├── test_naive_gaussian_elimination.py
+│   ├── chapter2_linear_systems/
+│   │   ├── test_naive_gaussian_elimination.py
 │   │   ├── test_gaussian_elimination_PP.py
-|   |   └── test_gaussian_elimination_TP.py
-│   │
-│   └── chapter3_/       ← add your tests here
+│   │   └── test_gaussian_elimination_TP.py
+│   └── chapter3_open_methods/
+│       ├── test_newton.py
+│       └── test_fixed_point.py
 │
+├── pseudocode/
+│   └── pseudocode_all_methods.md
+│
+├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 3. How to Run
+## 3. Setup — Step by Step
 
-### Install dependencies
+### Step 1 — Clone the repository
+```bash
+git clone https://github.com/jfelipefg17/ProyectoAnalisisNumerico.git
+```
+
+### Step 2 — Enter the project folder
+```bash
+cd ProyectoAnalisisNumerico/DigitalNumbers
+```
+
+> ⚠️ **All commands must be run from inside this `DigitalNumbers/` folder.**
+> If you run them from another folder, Python will not find the `methods/` package and tests will fail.
+
+### Step 3 — Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run a specific test (from the project root)
+That installs `numpy` and `pandas`, which are the only libraries needed.
+
+---
+
+## 4. How to Run Every Test
+
+Run each command from inside the `DigitalNumbers/` folder.
+
+### Chapter 1 — Single Variable Equations
+
 ```bash
+python tests/chapter1_single_variable/test_incremental_search.py
 python tests/chapter1_single_variable/test_bisection.py
 python tests/chapter1_single_variable/test_false_position.py
-python tests/chapter1_single_variable/test_incremental_search.py
+python tests/chapter1_single_variable/test_newton.py
+python tests/chapter1_single_variable/test_fixed_point.py
+python tests/chapter1_single_variable/test_secant.py
+python tests/chapter1_single_variable/test_multiple_roots.py
+```
 
+### Chapter 2 — Linear Systems
 
-
-
+```bash
 python tests/chapter2_linear_systems/test_naive_gaussian_elimination.py
 python tests/chapter2_linear_systems/test_gaussian_elimination_PP.py
 python tests/chapter2_linear_systems/test_gaussian_elimination_TP.py
 ```
 
-> **Important:** always run from the project root (`DigitalNumbers/`), not from inside a subfolder.
-> This ensures Python can find the `methods/` package correctly.
+### Chapter 3 — Open Methods
+
+```bash
+python tests/chapter3_open_methods/test_newton.py
+python tests/chapter3_open_methods/test_fixed_point.py
+```
+
+### Run everything at once (Mac/Linux)
+
+```bash
+for f in tests/chapter1_single_variable/test_*.py \
+          tests/chapter2_linear_systems/test_*.py \
+          tests/chapter3_open_methods/test_*.py; do
+  echo "--- $f ---"
+  python "$f"
+done
+```
 
 ---
 
-## 4. Methods Implemented
+## 5. Methods and Test Inputs
 
-### Chapter 1 — Single Variable Equations
+All tests use the **exact inputs given by the professor** in *Prueba_métodos_1.pdf*.
+`Tol = 1e-7`, `N = 100`, absolute error `Eₙ = |xₙ − xₙ₋₁|`.
 
-| Method             | File                    | Inputs                        | Outputs                                |
-|--------------------|-------------------------|-------------------------------|----------------------------------------|
-| Incremental Search | `incremental_search.py` | `f, x0, h, n_max`             | `a, b, iters, table, found`            |
-| Bisection          | `bisection.py`          | `f, a, b, tol, n_max`         | `root, iters, error, table, converged` |
-| False Position     | `false_position.py`     | `f, a, b, tol, n_max`         | `root, iters, error, table, converged` |
-| Newton-Raphson     | `newton.py`             | `f, df, x0, tol, n_max`       | `root, iters, error, table, converged` |
-| Fixed Point        | `fixed_point.py`        | `g, x0, tol, n_max`           | `root, iters, error, table, converged` |
+### Functions used
 
-All methods return a **dict** and a **pandas DataFrame table** with the iteration history.
+```
+f(x)   = ln(sin²(x) + 1) − 1/2
+f'(x)  = 2·sin(x)·cos(x) / (sin²(x) + 1)
+g(x)   = ln(sin²(x) + 1) − 1/2          ← used as x = g(x) for Fixed Point
+h(x)   = eˣ − x − 1
+h'(x)  = eˣ − 1
+h''(x) = eˣ
+A = [[2,-1,0,3],[1,0.5,3,8],[0,13,-2,11],[14,5,-2,3]],  b = [1,1,1,1]
+```
 
-### Chapter 2 — Linear Systems  
+### Inputs per method
 
-| Method             | File                    | Inputs                        | Outputs                              |
-|--------------------|-------------------------|-------------------------------|--------------------------------------|
-| naive gaussian elimination         | `naive_gaussian_elimination.py` | `A, b`             | `Stages, x`          |
-| gaussian elimination (Partial pivot)| `gaussian_elimination_PP.py`          | `A, b`         | `Stages, x` |
-| gaussian elimination (Total pivot) | `gaussian_elimination_TP.py`     | `A, b`         | `Stages, x_final` |
+| Method                  | Inputs                                  | Expected result          |
+|-------------------------|-----------------------------------------|--------------------------|
+| Incremental Search      | `f`, `x0=-3`, `h=0.5`, `N=100`         | 32 sign-change intervals |
+| Bisection               | `f`, `a=0`, `b=1`, `tol=1e-7`, `N=100` | root ≈ 0.9364045262      |
+| False Position          | `f`, `a=0`, `b=1`, `tol=1e-7`, `N=100` | root ≈ 0.9364045809      |
+| Newton-Raphson          | `f`, `f'`, `x0=0.5`, `tol=1e-7`, `N=100` | root ≈ 0.9364045809   |
+| Fixed Point             | `g`, `x0=-0.5`, `tol=1e-7`, `N=100`    | root ≈ −0.3744450530     |
+| Secant                  | `f`, `x0=0.5`, `x1=1`, `tol=1e-7`, `N=100` | root ≈ 0.9364045809 |
+| Multiple Roots          | `h`, `h'`, `h''`, `x0=1`, `tol=1e-7`, `N=100` | root ≈ 0.0        |
+| Naive Gaussian          | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
+| Gaussian PP             | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
+| Gaussian TP             | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
 
 ---
 
-## 5. Pattern: How to Add Your Methods
+## 6. How to Add Your Methods
 
-Follow these steps exactly so everything integrates cleanly.
-
-### Chapter 1 — Single variable
 ### Step 1 — Create your method file
 
-Create `methods/chapterX_your_topic/your_method.py` using this template:
+Use this template in `methods/chapterX_your_topic/your_method.py`:
 
 ```python
 """
 Method Name
 ===========
-One-paragraph explanation of what the method does and when to use it.
+One paragraph explaining what the method does.
 
 Author: Your Name
 Last updated: April 2026
 """
 
-import numpy as np
 import pandas as pd
+
 
 def your_method(param1, param2, tol: float, n_max: int) -> dict:
     """
-    Short description.
-
     Parameters
     ----------
     param1 : type — description
-    param2 : type — description
     tol    : float — error tolerance
     n_max  : int   — maximum iterations
 
     Returns
     -------
     dict with keys:
-        'root'      : float        — approximated solution
-        'iters'     : int          — iterations performed
-        'error'     : float        — final error
-        'table'     : pd.DataFrame — iteration table
-        'converged' : bool         — True if tolerance was met
+        'root'      : float
+        'iters'     : int
+        'error'     : float
+        'table'     : pd.DataFrame
+        'converged' : bool
     """
     rows = []
 
-    # --- Initialization ---
-    # ... your setup here ...
-
-    # --- Iteration loop ---
     for i in range(1, n_max + 1):
-
-        # Append current state to table
+        # ... your computation ...
         rows.append({
             "Iteration": i,
-            "x":         round(x, 10),   # adjust columns to your method
+            "x":         round(x, 10),
             "f(x)":      round(fx, 10),
             "error":     round(error, 10),
         })
-
-        # --- Stopping criterion ---
         if error < tol:
-            break
+            return {"root": x, "iters": i, "error": error,
+                    "table": pd.DataFrame(rows), "converged": True}
 
-        # ... update step ...
-
-    table = pd.DataFrame(rows)
-    return {
-        "root":      x,
-        "iters":     i,
-        "error":     error,
-        "table":     table,
-        "converged": error <= tol,
-    }
-```
-### Chapter 2 — Linear Systems
-
-```python
-"""
-Method Name
-===========
-One-paragraph explanation of what the method does and when to use it.
-
-Author: Your Name
-Last updated: April 2026
-"""
-
-import numpy as np
-
-def your_method(matrix A, vector b, stages = boolean) -> dict:
-    """
-    Short description.
-
-    Parameters
-    ----------
-    Matrix A
-    Vector b
-    n = Shape of A
-
-    Returns
-    -------
-    Steges of the elimination process
-    Vactor x with results
-    """
-
-    # --- Input Validations ---
-    # ... validations here ...
-
-    # --- Augmented matrix ---
-
-    # --- Forward elimination ---
-    for k in range(n - 1):
-
-       # ... Check for a non 0 pivot ...
-
-        for i in range(k + 1, n):
-            m = Aug[i, k] / Aug[k, k]
-            Aug[i, k:n+1] = Aug[i, k:n+1] - m * Aug[k, k:n+1]
-
-    # ... Check for non 0 last pivot ...
-    # --- Back substitution ---
-    x = np.zeros(n)
-
-    # ... Back substitution here ...
-
-    # --- Return x --- 
+    return {"root": x, "iters": n_max, "error": error,
+            "table": pd.DataFrame(rows), "converged": False}
 ```
 
-### Step 2 — Register it in `__init__.py`
+### Step 2 — Register in `__init__.py`
 
-Open (or create) `methods/chapterX_your_topic/__init__.py` and add:
-
+In `methods/chapterX_your_topic/__init__.py`:
 ```python
 from .your_method import your_method
 ```
 
-Then open `methods/__init__.py` and add:
-
+In `methods/__init__.py`:
 ```python
 from .chapterX_your_topic import your_method
 ```
 
 ### Step 3 — Create your test file
 
-Create `tests/chapterX_your_topic/test_your_method.py` using this template:
-
-### Chapter 1 — single variable
 ```python
-"""
-Test — Method Name
-===================
-To run:
-    python tests/chapterX_your_topic/test_your_method.py
-"""
-
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-import numpy as np
 from methods.chapterX_your_topic.your_method import your_method
+from tests.print_helpers import print_root_result
 
-
-def print_results(label: str, result: dict):
-    print(f"\n{'='*55}")
-    print(f"  {label}")
-    print(f"{'='*55}")
-    print(result["table"].to_string(index=False))
-    print(f"\n  Iterations : {result['iters']}")
-    print(f"  Root       : {result['root']:.10f}")
-    print(f"  Error      : {result['error']:.2e}")
-    print(f"  Status     : {'Converged ✓' if result['converged'] else 'Max iterations reached'}")
-    print()
-
-
-# Test 1 — describe the function and expected root
-f1 = lambda x: ...   # your function here
-result1 = your_method(f=f1, ...)
-print_results("Test 1: f(x) = ...  |  params", result1)
-
-# Test 2 — a different function
-f2 = lambda x: ...
-result2 = your_method(f=f2, ...)
-print_results("Test 2: f(x) = ...  |  params", result2)
+f = lambda x: ...
+result = your_method(f=f, ...)
+print_root_result("Test: f(x) = ...  |  params", result)
 ```
-### chapter 2 — Linear systems
 
-```python
-"""
-Test — Method Name
-===================
-To run:
-    python tests/chapterX_your_topic/test_your_method.py
-"""
-
-import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-
-import numpy as np
-from methods.chapterX_your_topic.your_method import your_method
-
-# ──────────────────────────────────────────────
-# Helper to print matrices nicely
-# ──────────────────────────────────────────────
-def print_matrix(matrix):
-    for row in matrix:
-        print(" ".join(f"{val:10.6f}" for val in row))
-    print()
-
-
-# ──────────────────────────────────────────────
-# Helper to print results consistently
-# ──────────────────────────────────────────────
-def print_results(label: str, x, stages):
-    print(f"\n{'='*55}")
-    print(f"  {label}")
-    print(f"{'='*55}\n")
-
-    for i, stage in enumerate(stages):
-        print(f"Stage {i}")
-        print_matrix(stage)
-
-    print("After back substitution:\n")
-    print("x:")
-    for xi in x:
-        print(f"{xi:.6f}")
-
-    print()
-
-# ──────────────────────────────────────────────
-# Test x
-#  # Matrix A
-#
-#  # Vector b
-# Expected results:
-#
-# # vector x
-# ──────────────────────────────────────────────
-
-# Matriz A
-
-# Vactor b
-
-x, stages = #name of method (A, b, return_stages=True)
-
-print_results("Test : nxn System", x, stages)
-```
-### Step 4 — Check the output format
-
-### Chapter — 1 single variables  
-
-The professor requires that every method prints a table. Make sure your table has:
-- An `"Iteration"` column as the first column
-- An `"error"` column as the last column
-- At least the key variables at each step in between
-
----
-
-### Chapter 2 — Linear Systems
-
-The professor requires that every method prints the stages of the elimination process and the result vector x. 
-- Every Stage must have the augmented matrix where you can clearly see the process step by step
-
----
-## 6. Output Format (Required by the Professor)
-
-### Chapter 1 — Single variable
-Every test must print output like this:
-
-```
-=======================================================
-  Test 1: f(x) = cos(x) - x  |  [0, 1]  tol=1e-7
-=======================================================
- Iteration         a         b      midpoint        f(mid)         error
-          1   0.0000    1.0000        0.5000        0.3776   1000.0000000
-          2   0.5000    1.0000        0.7500       -0.0183    250.0000000
-         ...
-         24   0.7391    0.7391        0.7391        0.0000      0.0000001
-
-  Iterations : 24
-  Root       : 0.7390851332
-  Error      : 8.94e-08
-  Status     : Converged ✓
-```
-Use `result["table"].to_string(index=False)` to print the table — do not use `print(df)` alone
-because it truncates rows.  
-
-### Chapter 2 — Linear systems
-Every test must print output like this:
-
-```
-Resultados:
-
-Etapa 0
-
- 2.000000  -1.000000  0.000000  3.000000  1.000000 
- 1.000000  0.500000  3.000000  8.000000  1.000000 
- 0.000000  13.000000  -2.000000  11.000000  1.000000 
- 14.000000  5.000000  -2.000000  3.000000  1.000000 
-
-Etapa 1
-
- 2.000000  -1.000000  0.000000  3.000000  1.000000 
- 0.000000  1.000000  3.000000  6.500000  0.500000 
- 0.000000  13.000000  -2.000000  11.000000  1.000000 
- 0.000000  12.000000  -2.000000  -18.000000  -6.000000 
-
-Etapa 2
-
- 2.000000  -1.000000  0.000000  3.000000  1.000000 
- 0.000000  1.000000  3.000000  6.500000  0.500000 
- 0.000000  0.000000  -41.000000  -73.500000  -5.500000 
- 0.000000  0.000000  -38.000000  -96.000000  -12.000000 
-
-Etapa 3
-
- 2.000000  -1.000000  0.000000  3.000000  1.000000 
- 0.000000  1.000000  3.000000  6.500000  0.500000 
- 0.000000  0.000000  -41.000000  -73.500000  -5.500000 
- 0.000000  0.000000  0.000000  -27.878049  -6.902439 
-
-
-Después de aplicar sustitución regresiva
-
-x:
-0.038495
--0.180227
--0.309711
-0.247594
-```
 ---
 
 ## 7. Coding Standards
 
-- **Language:** English only — comments, docstrings, variable names, print messages.
-- **Functions:** one function per file, same name as the file (`bisection.py` → `def bisection(...)`).
-- **Return type:** always a `dict` (see pattern above). Never return plain floats.
-- **Table:** always build the table with a list of `rows` dicts → `pd.DataFrame(rows)`.
-- **Rounding in table:** use `round(value, 10)` when appending to rows.
-- **No global variables** — everything goes inside the function.
-- **No `print()` inside method files** — printing happens only in test files.
-- **Error handling:** raise `ValueError` with a clear message for invalid inputs
-  (e.g., no sign change when required).
+- **Language:** English only — comments, docstrings, variable names, print output.
+- **One function per file**, same name as the file (`bisection.py` → `def bisection(...)`).
+- **Always return a `dict`** — never return plain floats or tuples.
+- **No `print()` inside method files** — printing only in test files.
+- **No global variables** — everything inside the function.
+- **Build the table** with `rows = []` → `pd.DataFrame(rows)`.
+- **Round table values** with `round(value, 10)`.
+- **Raise `ValueError`** with a clear message for invalid inputs.
+- **Use `print_root_result()` or `print_system_result()`** from `tests/print_helpers.py`.
+- **Never commit** `venv/`, `__pycache__/`, or `.DS_Store` — they are in `.gitignore`.

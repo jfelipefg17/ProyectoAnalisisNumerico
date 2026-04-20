@@ -1,80 +1,72 @@
 """
 Incremental Search Method
 =========================
-Finds an interval [a, b] where f(x) changes sign,
-which means a root of f(x) = 0 exists in that interval
-(by the Intermediate Value Theorem).
+Walks from x0 in steps of h, finding all intervals [a, b] where f(x)
+changes sign. Each sign change guarantees a root inside that interval
+by the Intermediate Value Theorem.
 
-Author: Juan Guillermo Isaza  ← replace with your name
+Author: Juan Guillermo Isaza
 Last updated: April 2026
 """
 
-import numpy as np
 import pandas as pd
 
 
 def incremental_search(f, x0: float, h: float, n_max: int) -> dict:
     """
-    Searches for an interval [a, b] where f(x) changes sign.
+    Searches for all intervals [xi, xi+1] where f(x) changes sign.
 
     Parameters
     ----------
-    f     : callable  — continuous function f(x)
-    x0    : float     — starting point
-    h     : float     — step size (increment)
-    n_max : int       — maximum number of iterations
+    f     : callable — continuous function f(x)
+    x0    : float    — starting point of the search
+    h     : float    — step size (increment)
+    n_max : int      — maximum number of steps allowed
 
     Returns
     -------
     dict with keys:
-        'a'      : float — left endpoint of the interval
-        'b'      : float — right endpoint of the interval
-        'iters'  : int   — number of iterations performed
-        'table'  : pd.DataFrame — iteration table
-        'found'  : bool  — True if a sign change was found
+        'intervals' : list of (a, b) — all bracketing intervals found
+        'iters'     : int            — total steps performed
+        'table'     : pd.DataFrame   — iteration table
+        'found'     : bool           — True if at least one interval was found
+
+    Table columns
+    -------------
+    iter     : step number
+    xi       : left endpoint of current step
+    f(xi)    : f evaluated at xi          (scientific notation)
+    xi+1     : right endpoint of current step
+    f(xi+1)  : f evaluated at xi+1        (scientific notation)
     """
 
-    # --- Initialization ---
-    x_prev = x0
-    f_prev = f(x_prev)
-    x_curr = x_prev + h
-    f_curr = f(x_curr)
+    x_prev    = x0
+    f_prev    = f(x_prev)
+    rows      = []
+    intervals = []
 
-    rows = []
-
-    # --- Iteration loop ---
     for i in range(1, n_max + 1):
-        rows.append({
-            "Iteration": i,
-            "x_prev":    round(x_prev, 10),
-            "f(x_prev)": round(f_prev, 10),
-            "x_curr":    round(x_curr, 10),
-            "f(x_curr)": round(f_curr, 10),
-        })
 
-        # Sign change found → root is bracketed
-        if f_prev * f_curr < 0:
-            table = pd.DataFrame(rows)
-            return {
-                "a":     x_prev,
-                "b":     x_curr,
-                "iters": i,
-                "table": table,
-                "found": True,
-            }
-
-        # Advance one step
-        x_prev = x_curr
-        f_prev = f_curr
         x_curr = x_prev + h
         f_curr = f(x_curr)
 
-    # Maximum iterations reached without finding a sign change
-    table = pd.DataFrame(rows)
+        rows.append({
+            "iter":    i,
+            "xi":      x_prev,
+            "f(xi)":   f_prev,
+            "xi+1":    x_curr,
+            "f(xi+1)": f_curr,
+        })
+
+        if f_prev * f_curr < 0:
+            intervals.append((x_prev, x_curr))
+
+        x_prev = x_curr
+        f_prev = f_curr
+
     return {
-        "a":     x_prev,
-        "b":     x_curr,
-        "iters": n_max,
-        "table": table,
-        "found": False,
+        "intervals": intervals,
+        "iters":     n_max,
+        "table":     pd.DataFrame(rows),
+        "found":     len(intervals) > 0,
     }

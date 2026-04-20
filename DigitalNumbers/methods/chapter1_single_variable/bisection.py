@@ -1,16 +1,15 @@
 """
 Bisection Method
 ================
-Finds a root of f(x) = 0 on the interval [a, b] by repeatedly
-halving the interval and keeping the half where a sign change occurs.
+Finds a root of f(x) = 0 on [a, b] by repeatedly halving the interval
+and keeping the half where a sign change occurs.
 
-Requires: f(a) * f(b) < 0  (sign change must exist at the start)
+Requires: f(a) * f(b) < 0
 
-Author: Juan Guillermo Isaza  ← replace with your name
+Author: Juan Guillermo Isaza
 Last updated: April 2026
 """
 
-import numpy as np
 import pandas as pd
 
 
@@ -29,68 +28,71 @@ def bisection(f, a: float, b: float, tol: float, n_max: int) -> dict:
     Returns
     -------
     dict with keys:
-        'root'   : float        — approximated root
-        'iters'  : int          — number of iterations performed
-        'error'  : float        — final absolute error
-        'table'  : pd.DataFrame — iteration table
-        'converged' : bool      — True if tolerance was reached
+        'root'      : float        — approximated root
+        'iters'     : int          — number of iterations performed
+        'error'     : float        — final absolute error
+        'table'     : pd.DataFrame — iteration table
+        'converged' : bool         — True if tolerance was reached
+
+    Table columns
+    -------------
+    iter   : iteration number
+    a      : left endpoint                  (10 decimal places)
+    xm     : midpoint = (a + b) / 2         (10 decimal places)
+    b      : right endpoint                 (10 decimal places)
+    f(xm)  : f evaluated at midpoint        (scientific notation)
+    E      : absolute error |xm - xm_prev|  (scientific notation)
     """
 
-    # --- Validate starting interval ---
     if f(a) * f(b) > 0:
         raise ValueError(
             f"f(a) and f(b) must have opposite signs. "
-            f"Got f({a}) = {f(a):.6f}, f({b}) = {f(b):.6f}"
+            f"Got f({a}) = {f(a):.6e},  f({b}) = {f(b):.6e}"
         )
 
-    # --- Initialization ---
-    f_a  = f(a)
-    p_mid = (a + b) / 2.0
-    f_mid = f(p_mid)
-    error = 1000.0
+    f_a   = f(a)
+    xm    = (a + b) / 2.0
+    f_xm  = f(xm)
+    E     = None          # no error on first iteration
     count = 1
+    rows  = []
 
-    rows = []
+    while (E is None or E > tol) and count < n_max:
 
-    # --- Iteration loop ---
-    while error > tol and count < n_max:
         rows.append({
-            "Iteration": count,
-            "a":         round(a, 10),
-            "b":         round(b, 10),
-            "midpoint":  round(p_mid, 10),
-            "f(mid)":    round(f_mid, 10),
-            "error":     round(error, 10),
+            "iter":  count,
+            "a":     a,
+            "xm":    xm,
+            "b":     b,
+            "f(xm)": f_xm,
+            "E":     E,
         })
 
-        # Narrow the interval
-        if f_a * f_mid < 0:
-            b = p_mid           # root is in the left half
+        if f_a * f_xm < 0:
+            b = xm
         else:
-            a     = p_mid       # root is in the right half
-            f_a   = f_mid
+            a    = xm
+            f_a  = f_xm
 
-        p_prev = p_mid
-        p_mid  = (a + b) / 2.0
-        f_mid  = f(p_mid)
-        error  = abs(p_mid - p_prev)
-        count += 1
+        xm_prev = xm
+        xm      = (a + b) / 2.0
+        f_xm    = f(xm)
+        E       = abs(xm - xm_prev)
+        count  += 1
 
-    # Append final row
     rows.append({
-        "Iteration": count,
-        "a":         round(a, 10),
-        "b":         round(b, 10),
-        "midpoint":  round(p_mid, 10),
-        "f(mid)":    round(f_mid, 10),
-        "error":     round(error, 10),
+        "iter":  count,
+        "a":     a,
+        "xm":    xm,
+        "b":     b,
+        "f(xm)": f_xm,
+        "E":     E,
     })
 
-    table = pd.DataFrame(rows)
     return {
-        "root":      p_mid,
+        "root":      xm,
         "iters":     count,
-        "error":     error,
-        "table":     table,
-        "converged": error <= tol,
+        "error":     E,
+        "table":     pd.DataFrame(rows),
+        "converged": E <= tol,
     }
