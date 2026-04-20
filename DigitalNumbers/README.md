@@ -221,13 +221,15 @@ def your_method(matrix A, vector b, stages = boolean) -> dict:
     ----------
     Matrix A
     Vector b
-    
+    n = Shape of A
 
     Returns
     -------
     Steges of the elimination process
     Vactor x with results
     """
+
+    
 ```
 
 ### Step 2 — Register it in `__init__.py`
