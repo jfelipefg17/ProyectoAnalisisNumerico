@@ -243,7 +243,13 @@ def your_method(matrix A, vector b, stages = boolean) -> dict:
             m = Aug[i, k] / Aug[k, k]
             Aug[i, k:n+1] = Aug[i, k:n+1] - m * Aug[k, k:n+1]
 
+    # ... Check for non 0 last pivot ...
+    # --- Back substitution ---
+    x = np.zeros(n)
 
+    # ... Back substitution here ...
+
+    # --- Return x --- 
 ```
 
 ### Step 2 — Register it in `__init__.py`
