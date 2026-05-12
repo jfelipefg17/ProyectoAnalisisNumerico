@@ -792,3 +792,26 @@ Approximation of the solution vector
 
 **BEGIN**
 
+Set the current approximation vector to x0.
+Set the initial error to a large number so the loop starts.
+Set the iteration counter to zero.
+
+Repeat until the error is smaller than the tolerance or N iterations are reached:
+
+>Store a copy of the current approximation vector to compare errors later.
+>
+>For each equation in the system:
+>
+>>Compute the summation of the terms before the diagonal element using the newest updated values.
+>>
+>>Compute the summation of the terms after the diagonal element using the values from the previous iteration.
+>>
+>>Compute the Gauss-Seidel approximation for the current variable.
+>>
+>>Adjust the approximation using the relaxation factor w.
+>
+>Compute the error as the norm or maximum absolute difference between the updated vector and the previous approximation.
+>
+>Increase the iteration counter by one.
+
+Report the final approximation vector as the solution.
