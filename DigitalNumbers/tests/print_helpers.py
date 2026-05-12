@@ -118,3 +118,35 @@ def print_system_result(label: str, x, stages) -> None:
     for i, xi in enumerate(x):
         print(f"    x[{i}] = {xi:.10f}")
     print()
+
+
+def print_lu_result(label: str, x, stages) -> None:
+    """
+    Print stages for LU factorization methods.
+    """
+
+    print(f"\n{'='*65}")
+    print(f"  {label}")
+    print(f"{'='*65}")
+
+    for i, stage in enumerate(stages):
+
+        print(f"\n  Stage {i}")
+
+        print("\n  M:")
+        for row in stage["M"]:
+            print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
+        print("\n  L:")
+        for row in stage["L"]:
+            print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
+        print("\n  U:")
+        for row in stage["U"]:
+            print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
+    print("\n  Solution x:")
+    for i, xi in enumerate(x):
+        print(f"    x[{i}] = {xi:.10f}")
+
+    print()
