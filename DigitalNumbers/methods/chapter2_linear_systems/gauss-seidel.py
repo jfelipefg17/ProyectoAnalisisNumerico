@@ -1,6 +1,6 @@
 import numpy as np
 
-def gauss_seidel(A, b, x0, tol, Nmax):
+def gauss_seidel(A, b, x0, tol, Nmax, norm_type=2):
 
     # Convert inputs to arrays
     A = np.array(A, dtype=float)
@@ -38,10 +38,11 @@ def gauss_seidel(A, b, x0, tol, Nmax):
             # Update current variable
             x[i] = (b[i] - summation1 - summation2) / A[i, i]
 
-        # Compute error
-        error = np.linalg.norm(x - x_old, ord=np.inf)
+        # Compute error using selected norm
+        error = np.linalg.norm(x - x_old, ord=norm_type)
 
         # Increase iteration counter
         iterations += 1
 
     return x, iterations, error
+    
