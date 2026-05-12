@@ -748,3 +748,47 @@ N — maximum number of iterations
 
 **Output:**
 Approximation of the solution vector
+
+**BEGIN**
+
+Set the current approximation vector to x0.
+Set the initial error to a large number so the loop starts.
+Set the iteration counter to zero.
+
+Repeat until the error is smaller than the tolerance or N iterations are reached:
+
+>Store a copy of the current approximation vector to compare errors later.
+>
+>For each equation in the system:
+>
+>>Compute the summation of the terms before the diagonal element using the newest updated values.
+>>
+>>Compute the summation of the terms after the diagonal element using the values from the previous iteration.
+>>
+>>Calculate the new approximation for the current variable.
+>>
+>Compute the error as the norm or maximum absolute difference between the updated vector and the previous approximation.
+>
+>Increase the iteration counter by one.
+
+Report the final approximation vector as the solution.
+
+**END**
+
+## Method 11 — Successive Over-Relaxation (SOR)
+
+**Purpose:** This iterative method improves the Gauss-Seidel approach by introducing a relaxation factor that can accelerate convergence. Each new approximation is adjusted using both the previous value and the newly computed value.
+
+**Inputs:**
+A — coefficient matrix
+b — independent terms vector
+x0 — initial approximation vector
+w — relaxation factor
+tol — acceptable error
+N — maximum number of iterations
+
+**Output:**
+Approximation of the solution vector
+
+**BEGIN**
+
