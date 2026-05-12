@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def forward_substitution(M):
     """
     Solves a lower triangular system using forward substitution.
