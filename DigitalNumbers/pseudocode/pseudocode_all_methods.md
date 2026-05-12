@@ -572,6 +572,68 @@ Apply back substitution
 
 Return the vector x and the stages
 
+## Method 6 — Crout Factorization
+
+**Purpose:** This method factors an invertible matrix A into the product:  
+- A = LU  
+
+where:
+- L is a lower triangular matrix
+- U is an upper triangular matrix with ones on its diagonal
+
+The factorization is performed directly using the Crout method without Gaussian elimination.
+
+After obtaining L and U, the system is solved by applying forward substitution and back substitution.
+
+**Inputs**
+- Matrix A (n × n)
+- Vector b (n × 1)
+
+**Outputs**
+- Solution vector x
+- Lower triangular matrix L
+- Upper triangular matrix U
+
+Check input dimensions:
+- If A is not square → Stop
+- If dimensions of A and b are not compatible → Stop
+- If det(A) = 0 → Stop
+
+Initialize:
+- n = size of A
+- L = identity matrix of size n × n
+- U = identity matrix of size n × n
+
+Store initial stage:
+> Stage 0 = A
+
+> For i = 1 to n-1:
+
+Compute column i of L:
+> For j = i to n:
+>   L[j,i] = A[j,i] - dot(L[j,1:i-1], U[1:i-1,i])
+
+If L[i,i] = 0 → Stop
+
+Compute row i of U:
+> For j = i+1 to n:
+>   U[i,j] = (A[i,j] - dot(L[i,1:i-1], U[1:i-1,j])) / L[i,i]
+
+Store current stage:
+- Save matrices L and U
+
+End loops
+
+Compute the last element of L:
+> L[n,n] = A[n,n] - dot(L[n,1:n-1], U[1:n-1,n])
+
+Apply forward substitution
+
+Apply back substitution
+
+Return the vector x and the stages
+
+
 ## Method 9 — Jacobi Method
 
 **Purpose:** This iterative method solves a system of linear equations by computing each variable using only the values from the previous iteration. The process continues until the approximations stabilize within a desired tolerance.
