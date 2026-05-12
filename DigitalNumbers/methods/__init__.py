@@ -13,4 +13,5 @@ from .chapter2_linear_systems import (
     gaussian_elimination_PP,
     gaussian_elimination_TP,
     LU_simple,
+    LU_partial_pivoting,
 )
