@@ -41,3 +41,4 @@ print_lu_result(
     "Doolittle Factorization",
     x,
     stages
+)
