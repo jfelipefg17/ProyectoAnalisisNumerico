@@ -16,4 +16,8 @@ from .chapter2_linear_systems import (
     LU_partial_pivoting,
     crout,
     doolittle,
+    cholesky,
+)
+from .chapter4_interpolation import (
+    vandermonde,
 )
