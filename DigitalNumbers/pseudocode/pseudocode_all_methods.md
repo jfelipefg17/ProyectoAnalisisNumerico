@@ -437,3 +437,63 @@ Create vector x_final such that:
 
 return x_final
 
+## Method 4 — LU with Simple Gaussian Elimination
+
+**Purpose:**This method factors an invertible matrix A into the product:
+> A = LU
+where: L is a lower triangular matrix with ones on its diagonal and U is an upper triangular matrix, The factorization is performed using simple Gaussian elimination without pivoting.  
+After obtaining L and U, the system is solved by applying forward substitution and back substitution.  
+
+---
+
+**Inputs**
+- Matrix A (n × n)
+- Vector b (n × 1)
+
+---
+
+**Outputs**
+- Solution vector x
+- Lower triangular matrix L
+- Upper triangular matrix U
+
+---
+
+Check input dimensions:
+- If A is not square → Stop
+- If dimensions of A and b are not compatible → Stop
+- If det(A) = 0 → Stop
+
+Initialize:
+- n = size of A
+- L = identity matrix of size n
+- U = zero matrix of size n × n
+- M = A
+
+Store initial stage:
+> Stage 0 = M
+> For k = 1 to n-1:
+>   If M[k,k] = 0 → Stop
+> For i = k+1 to n:
+>   If M[i,k] ≠ 0:
+>     L[i,k] = M[i,k] / M[k,k]  
+
+Perform row elimination:  
+> For j = k to n:
+>   M[i,j] = M[i,j] - L[i,k] * M[k,j]
+
+Update matrix U:
+- Copy the upper triangular part of M into U
+
+Store current stage:
+- Save matrices M, L, and U
+
+End loops
+
+> If U[n,n] = 0 → Stop
+
+Apply forward substitution
+
+Apply back substitution
+
+Return the vector x and the stages
