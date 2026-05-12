@@ -23,9 +23,11 @@ jobs:
         pip install numpy pandas pytest
 
     - name: Run tests
+      working-directory: DigitalNumbers
       run: |
-        # Change the path below to run the tests you need
-        python DigitalNumbers/tests/chapter2_linear_systems/test_LU_simple.py
-        python DigitalNumbers/tests/chapter2_linear_systems/test_LU_partial_pivoting.py
-        python DigitalNumbers/tests/chapter2_linear_systems/test_crout.py
-        python DigitalNumbers/tests/chapter2_linear_systems/test_doolittle.py
+        python tests/chapter2_linear_systems/test_LU_simple.py
+        python tests/chapter2_linear_systems/test_LU_partial_pivoting.py
+        python tests/chapter2_linear_systems/test_crout.py
+        python tests/chapter2_linear_systems/test_doolittle.py
+        python tests/chapter2_linear_systems/test_cholesky.py
+        python tests/chapter4_interpolation/test_vandermonde.py
