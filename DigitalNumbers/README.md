@@ -50,7 +50,11 @@ DigitalNumbers/
 │   │   ├── __init__.py
 │   │   ├── naive_gaussian_elimination.py
 │   │   ├── gaussian_elimination_PP.py
-│   │   └── gaussian_elimination_TP.py
+│   │   ├── gaussian_elimination_TP.py
+│   │   ├── LU_simple.py
+│   │   ├── LU_partial_pivoting.py
+│   │   ├── crout.py
+│   │   └── doolittle.py
 │   └── chapter3_open_methods/
 │       └── __init__.py
 │
@@ -67,7 +71,11 @@ DigitalNumbers/
 │   ├── chapter2_linear_systems/
 │   │   ├── test_naive_gaussian_elimination.py
 │   │   ├── test_gaussian_elimination_PP.py
-│   │   └── test_gaussian_elimination_TP.py
+│   │   ├── test_gaussian_elimination_TP.py
+│   │   ├── test_LU_simple.py
+│   │   ├── test_LU_partial_pivoting.py
+│   │   ├── test_crout.py
+│   │   └── test_doolittle.py
 │   └── chapter3_open_methods/
 │       ├── test_newton.py
 │       └── test_fixed_point.py
@@ -128,6 +136,10 @@ python tests/chapter1_single_variable/test_multiple_roots.py
 python tests/chapter2_linear_systems/test_naive_gaussian_elimination.py
 python tests/chapter2_linear_systems/test_gaussian_elimination_PP.py
 python tests/chapter2_linear_systems/test_gaussian_elimination_TP.py
+python tests/chapter2_linear_systems/test_LU_simple.py
+python tests/chapter2_linear_systems/test_LU_partial_pivoting.py
+python tests/chapter2_linear_systems/test_crout.py
+python tests/chapter2_linear_systems/test_doolittle.py
 ```
 
 ### Chapter 3 — Open Methods
@@ -181,6 +193,11 @@ A = [[2,-1,0,3],[1,0.5,3,8],[0,13,-2,11],[14,5,-2,3]],  b = [1,1,1,1]
 | Naive Gaussian          | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
 | Gaussian PP             | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
 | Gaussian TP             | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
+| LU simple               | `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| LU with partial pivoting| `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| Crout                   | `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| Doolittle               | `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+
 
 ---
 
