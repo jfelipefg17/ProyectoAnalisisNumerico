@@ -1,6 +1,6 @@
 import numpy as np
 
-def jacobi(A, b, x0, tol, Nmax):
+def jacobi(A, b, x0, tol, Nmax, norm_type=2):
 
     # Convert inputs to arrays
     A = np.array(A, dtype=float)
@@ -36,8 +36,8 @@ def jacobi(A, b, x0, tol, Nmax):
 
             x_new[i] = (b[i] - summation) / A[i, i]
 
-        # Compute error
-        error = np.linalg.norm(x_new - x_old, ord=np.inf)
+        # Compute error using selected norm
+        error = np.linalg.norm(x_new - x_old, ord=norm_type)
 
         # Update approximation
         x = x_new.copy()
