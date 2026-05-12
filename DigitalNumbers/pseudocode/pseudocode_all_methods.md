@@ -817,4 +817,82 @@ Repeat until the error is smaller than the tolerance or N iterations are reached
 Report the final approximation vector as the solution.
 
 **END**
+## Method 12 — Newton Interpolation Method
 
+**Purpose:** This interpolation method constructs a polynomial using divided differences.
+
+**Inputs:**
+Table — data points containing x-values and y-values
+
+**Output:**
+Interpolating polynomial and Newton coefficients
+
+**BEGIN**
+
+Set the x-values and y-values from the table.
+
+Determine the number of data points.
+
+Create a divided differences table initialized with zeros.
+
+Place the y-values in the first column of the table.
+
+Repeat for each column of the divided differences table starting from the second column:
+
+>Repeat for each valid row:
+>
+>>Compute the divided difference using the values from the previous column.
+>>
+>>Store the result in the divided differences table.
+
+Extract the Newton coefficients from the first row.
+
+Build and expand the polynomial.
+
+Print the divided differences table.
+
+Print the Newton coefficients.
+
+Print the final interpolating polynomial.
+
+**END**
+
+## Method 13 — Lagrange Interpolation Method
+
+**Purpose:** This interpolation method constructs a polynomial as a weighted sum of Lagrange basis polynomials.
+
+**Inputs:**
+Table — data points containing x-values and y-values
+
+**Output:**
+Interpolating polynomial and polynomial coefficients
+
+**BEGIN**
+
+Set the x-values and y-values from the table.
+
+Determine the number of data points.
+
+Initialize the polynomial equal to zero.
+
+Repeat for each data point:
+
+>Initialize the current basis polynomial equal to one.
+>
+>Repeat for each other data point:
+>
+>>Multiply the basis polynomial by the corresponding linear factor.
+>>
+>>Update the basis polynomial.
+>
+>Add the weighted basis polynomial to the total polynomial.
+
+Expand the final polynomial.
+
+Extract the coefficients.
+
+Print the final interpolating polynomial.
+
+Print the polynomial coefficients.
+
+**END**
