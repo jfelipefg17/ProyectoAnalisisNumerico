@@ -121,9 +121,6 @@ def print_system_result(label: str, x, stages) -> None:
 
 
 def print_lu_result(label: str, x, stages) -> None:
-    """
-    Print stages for LU factorization methods.
-    """
 
     print(f"\n{'='*65}")
     print(f"  {label}")
@@ -136,6 +133,13 @@ def print_lu_result(label: str, x, stages) -> None:
         print("\n  M:")
         for row in stage["M"]:
             print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
+        # Print P only if it exists
+        if "P" in stage:
+
+            print("\n  P:")
+            for row in stage["P"]:
+                print("  " + "  ".join(f"{v:12.6f}" for v in row))
 
         print("\n  L:")
         for row in stage["L"]:
