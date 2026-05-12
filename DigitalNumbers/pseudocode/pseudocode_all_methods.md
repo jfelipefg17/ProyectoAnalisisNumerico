@@ -440,7 +440,7 @@ return x_final
 ## Method 4 — LU with Simple Gaussian Elimination
 
 **Purpose:**This method factors an invertible matrix A into the product:
-> A = LU
+> A = LU  
 where: L is a lower triangular matrix with ones on its diagonal and U is an upper triangular matrix, The factorization is performed using simple Gaussian elimination without pivoting.  
 After obtaining L and U, the system is solved by applying forward substitution and back substitution.  
 
