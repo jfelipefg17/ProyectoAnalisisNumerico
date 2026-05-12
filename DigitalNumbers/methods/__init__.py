@@ -15,4 +15,5 @@ from .chapter2_linear_systems import (
     LU_simple,
     LU_partial_pivoting,
     crout,
+    doolittle,
 )
