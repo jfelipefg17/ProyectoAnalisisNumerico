@@ -492,3 +492,82 @@ Apply forward substitution
 Apply back substitution
 
 Return the vector x and the stages
+
+
+## Method 5 — LU Factorization with Partial Pivoting
+
+**Purpose:** This method factors an invertible matrix A into the product:  
+- PA = LU  
+
+where:
+- P is a permutation matrix
+- L is a lower triangular matrix with ones on its diagonal
+- U is an upper triangular matrix
+
+The factorization is performed using Gaussian elimination with partial pivoting, improving numerical stability by selecting the largest pivot in each column.
+
+After obtaining P, L and U, the system is solved by applying forward substitution and back substitution.
+
+**Inputs**
+- Matrix A (n × n)
+- Vector b (n × 1)
+
+**Outputs**
+- Solution vector x
+- Permutation matrix P
+- Lower triangular matrix L
+- Upper triangular matrix U
+
+Check input dimensions:
+- If A is not square → Stop
+- If dimensions of A and b are not compatible → Stop
+- If det(A) = 0 → Stop
+
+Initialize:
+- n = size of A
+- L = identity matrix of size n
+- U = zero matrix of size n × n
+- P = identity matrix of size n
+- M = A
+
+Store initial stage:
+> Stage 0 = M
+
+> For k = 1 to n-1:
+
+Find the pivot row:
+> p = index of the row with the largest absolute value in column k
+
+If the pivot row is different from k:
+> Swap rows k and p in M
+> Swap rows k and p in P
+
+If k > 1:
+> Swap rows k and p in L only from columns 1 to k-1
+
+If M[k,k] = 0 → Stop
+
+> For i = k+1 to n:
+
+If M[i,k] ≠ 0:
+> L[i,k] = M[i,k] / M[k,k]
+
+Perform row elimination:
+> For j = k to n:
+>   M[i,j] = M[i,j] - L[i,k] * M[k,j]
+
+Update matrix U:
+- Copy the upper triangular part of M into U
+
+Store current stage:
+- Save matrices M, P, L, and U
+
+End loops
+
+> If U[n,n] = 0 → Stop
+
+Apply forward substitution
+
+Apply back substitution
+
+Return the vector x and the stages
