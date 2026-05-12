@@ -30,7 +30,7 @@ jobs:
         python tests/chapter2_linear_systems/test_crout.py
         python tests/chapter2_linear_systems/test_doolittle.py
         python tests/chapter2_linear_systems/test_cholesky.py
+        python tests/chapter2_interpolation/test_jacobi.py
+        python tests/chapter2_interpolation/test_gauss-seidel.py
+        python tests/chapter2_interpolation/test_sor.py
         python tests/chapter4_interpolation/test_vandermonde.py
-        python tests/chapter4_interpolation/test_jacobi.py
-        python tests/chapter4_interpolation/test_gauss-seidel.py
-        python tests/chapter4_interpolation/test_sor.py
