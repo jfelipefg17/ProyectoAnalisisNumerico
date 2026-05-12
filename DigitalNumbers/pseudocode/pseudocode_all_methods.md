@@ -735,3 +735,16 @@ Repeat until the error is smaller than the tolerance or N iterations are reached
 
 **END**
 
+## Method 10 — Gauss-Seidel Method
+
+**Purpose:** This iterative method solves a system of linear equations by updating each variable sequentially and immediately using the newest available values during the same iteration. This usually allows faster convergence than the Jacobi method.
+
+**Inputs:**
+A — coefficient matrix
+b — independent terms vector
+x0 — initial approximation vector
+tol — acceptable error
+N — maximum number of iterations
+
+**Output:**
+Approximation of the solution vector
