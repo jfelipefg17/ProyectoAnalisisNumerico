@@ -571,3 +571,37 @@ Apply forward substitution
 Apply back substitution
 
 Return the vector x and the stages
+
+## Method 9 — Jacobi Method
+
+**Purpose:** This iterative method solves a system of linear equations by computing each variable using only the values from the previous iteration. The process continues until the approximations stabilize within a desired tolerance.
+
+**Inputs:**
+A — coefficient matrix
+b — independent terms vector
+x0 — initial approximation vector
+tol — acceptable error
+N — maximum number of iterations
+
+**Output:**
+Approximation of the solution vector
+
+**BEGIN**
+
+Set the current approximation vector to x0.
+Set the initial error to a large number so the loop starts.
+Set the iteration counter to zero.
+
+Repeat until the error is smaller than the tolerance or N iterations are reached:
+
+>Create a new empty vector to store the updated approximations.
+>For each equation in the system:
+>>Compute the summation of all terms except the diagonal element using the values from the previous iteration.
+>>Calculate the new approximation for the current variable.
+>Compute the error as the norm or maximum absolute difference between the new vector and the previous approximation.
+>Replace the old approximation vector with the new one.
+>Increase the iteration counter by one.
+Report the final approximation vector as the solution.
+
+**END**
+
