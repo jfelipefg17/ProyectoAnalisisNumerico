@@ -54,7 +54,10 @@ DigitalNumbers/
 │   │   ├── LU_simple.py
 │   │   ├── LU_partial_pivoting.py
 │   │   ├── crout.py
-│   │   └── doolittle.py
+│   │   ├── doolittle.py
+│   │   ├── jacobi.py
+│   │   ├── gauss-seidel.py
+│   │   └── sor.py
 │   └── chapter3_open_methods/
 │       └── __init__.py
 │
@@ -75,7 +78,10 @@ DigitalNumbers/
 │   │   ├── test_LU_simple.py
 │   │   ├── test_LU_partial_pivoting.py
 │   │   ├── test_crout.py
-│   │   └── test_doolittle.py
+│   │   ├── test_doolittle.py
+│   │   ├── test_jacobi.py
+│   │   ├── test_gauss-seidel.py
+│   │   └── test_sor.py
 │   └── chapter3_open_methods/
 │       ├── test_newton.py
 │       └── test_fixed_point.py
@@ -140,6 +146,9 @@ python tests/chapter2_linear_systems/test_LU_simple.py
 python tests/chapter2_linear_systems/test_LU_partial_pivoting.py
 python tests/chapter2_linear_systems/test_crout.py
 python tests/chapter2_linear_systems/test_doolittle.py
+python tests/chapter2_linear_systems/test_jacobi.py
+python tests/chapter2_linear_systems/test_gauss-seidel.py
+python tests/chapter2_linear_systems/test_sor.py
 ```
 
 ### Chapter 3 — Open Methods
