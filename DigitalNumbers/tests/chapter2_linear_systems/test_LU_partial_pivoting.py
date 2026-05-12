@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 import numpy as np
 
 from methods.chapter2_linear_systems.LU_partial_pivoting import LU_partial_pivoting
-from helpers.print_helpers import print_lu_result
+from tests.print_helpers import print_lu_result
 
 
 # ──────────────────────────────────────────────
