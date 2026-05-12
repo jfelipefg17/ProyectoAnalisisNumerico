@@ -1,6 +1,6 @@
 import numpy as np
 
-def sor(A, b, x0, w, tol, Nmax):
+def sor(A, b, x0, w, tol, Nmax, norm_type=2):
 
     # Convert inputs to arrays
     A = np.array(A, dtype=float)
@@ -41,8 +41,8 @@ def sor(A, b, x0, w, tol, Nmax):
             # Relaxation update
             x[i] = (1 - w) * x_old[i] + w * gs_value
 
-        # Compute error
-        error = np.linalg.norm(x - x_old, ord=np.inf)
+        # Compute error using selected norm
+        error = np.linalg.norm(x - x_old, ord=norm_type)
 
         # Increase iteration counter
         iterations += 1
