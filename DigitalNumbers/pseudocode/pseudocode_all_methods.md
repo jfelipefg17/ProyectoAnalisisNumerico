@@ -657,13 +657,20 @@ Set the iteration counter to zero.
 Repeat until the error is smaller than the tolerance or N iterations are reached:
 
 >Create a new empty vector to store the updated approximations.
+>
 >For each equation in the system:
+>
 >>Compute the summation of all terms except the diagonal element using the values from the previous iteration.
+>>
 >>Calculate the new approximation for the current variable.
+>>
 >Compute the error as the norm or maximum absolute difference between the new vector and the previous approximation.
+>
 >Replace the old approximation vector with the new one.
+>
 >Increase the iteration counter by one.
-Report the final approximation vector as the solution.
+>
+>Report the final approximation vector as the solution.
 
 **END**
 
