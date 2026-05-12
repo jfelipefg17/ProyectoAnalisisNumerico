@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def forward_substitution(M):
     """
     Solves a lower triangular system using forward substitution.
@@ -18,7 +17,6 @@ def forward_substitution(M):
 
     return x
 
-
 def backward_substitution(M):
     """
     Solves an upper triangular system using backward substitution.
@@ -35,7 +33,6 @@ def backward_substitution(M):
         x[i] = (M[i, n] - s) / M[i, i]
 
     return x
-
 
 def doolittle(A, b):
     """
