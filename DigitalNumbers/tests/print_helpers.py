@@ -130,24 +130,35 @@ def print_lu_result(label: str, x, stages) -> None:
 
         print(f"\n  Stage {i}")
 
-        print("\n  M:")
-        for row in stage["M"]:
-            print("  " + "  ".join(f"{v:12.6f}" for v in row))
+        if "A" in stage:
 
-        # Print P only if it exists
+            print("\n  A:")
+            for row in stage["A"]:
+                print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
+        if "M" in stage:
+
+            print("\n  M:")
+            for row in stage["M"]:
+                print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
         if "P" in stage:
 
             print("\n  P:")
             for row in stage["P"]:
                 print("  " + "  ".join(f"{v:12.6f}" for v in row))
 
-        print("\n  L:")
-        for row in stage["L"]:
-            print("  " + "  ".join(f"{v:12.6f}" for v in row))
+        if "L" in stage:
 
-        print("\n  U:")
-        for row in stage["U"]:
-            print("  " + "  ".join(f"{v:12.6f}" for v in row))
+            print("\n  L:")
+            for row in stage["L"]:
+                print("  " + "  ".join(f"{v:12.6f}" for v in row))
+
+        if "U" in stage:
+
+            print("\n  U:")
+            for row in stage["U"]:
+                print("  " + "  ".join(f"{v:12.6f}" for v in row))
 
     print("\n  Solution x:")
     for i, xi in enumerate(x):
