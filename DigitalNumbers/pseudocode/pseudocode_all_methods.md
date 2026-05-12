@@ -633,6 +633,67 @@ Apply back substitution
 
 Return the vector x and the stages
 
+## Method 7 — Doolittle Factorization
+
+**Purpose:** This method factors an invertible matrix A into the product:  
+- A = LU  
+
+where:
+- L is a lower triangular matrix with ones on its diagonal
+- U is an upper triangular matrix
+
+The factorization is performed directly using the Doolittle method without Gaussian elimination.
+
+After obtaining L and U, the system is solved by applying forward substitution and back substitution.
+
+**Inputs**
+- Matrix A (n × n)
+- Vector b (n × 1)
+
+**Outputs**
+- Solution vector x
+- Lower triangular matrix L
+- Upper triangular matrix U
+
+Check input dimensions:
+- If A is not square → Stop
+- If dimensions of A and b are not compatible → Stop
+- If det(A) = 0 → Stop
+
+Initialize:
+- n = size of A
+- L = identity matrix of size n × n
+- U = identity matrix of size n × n
+
+Store initial stage:
+> Stage 0 = A
+
+> For i = 1 to n-1:
+
+Compute row i of U:
+> For j = i to n:
+>   U[i,j] = A[i,j] - dot(L[i,1:i-1], U[1:i-1,j])
+
+If U[i,i] = 0 → Stop
+
+Compute column i of L:
+> For j = i+1 to n:
+>   L[j,i] = (A[j,i] - dot(L[j,1:i-1], U[1:i-1,i])) / U[i,i]
+
+Store current stage:
+- Save matrices L and U
+
+End loops
+
+Compute the last element of U:
+> U[n,n] = A[n,n] - dot(L[n,1:n-1], U[1:n-1,n])
+
+Apply forward substitution
+
+Apply back substitution
+
+Return the vector x and the stages
+
 
 ## Method 9 — Jacobi Method
 
