@@ -22,11 +22,11 @@ Repository: https://github.com/jfelipefg17/ProyectoAnalisisNumerico
 DigitalNumbers is a web application that implements the numerical methods studied in class.
 The Python code is organized by chapter so each team member works independently without conflicts.
 
-| Chapter | Topic                         | Owner                                                   |
-|---------|-------------------------------|---------------------------------------------------------|
+| Chapter | Topic                         | Owner                                                      |
+|---------|-------------------------------|------------------------------------------------------------|
 | 1       | Single Variable Equations     | Juan Guillermo Isaza · Juan Felipe Florez · Luciana Pineda |
-| 2       | Linear Systems                | Jerónimo Mesa Alzate                                    |
-| 3       | Open Methods                  | Juan Felipe Florez · Luciana Pineda                     |
+| 2       | Linear Systems                | Jerónimo Mesa Alzate                                       |
+| 3       | Open Methods                  | Juan Felipe Florez · Luciana Pineda                        |
 
 ---
 
