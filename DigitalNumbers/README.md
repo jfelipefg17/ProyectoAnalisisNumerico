@@ -58,8 +58,13 @@ DigitalNumbers/
 │   │   ├── jacobi.py
 │   │   ├── gauss-seidel.py
 │   │   └── sor.py
-│   └── chapter3_open_methods/
-│       └── __init__.py
+│   ├── chapter3_open_methods/
+│   │   └── __init__.py
+│   └── chapter4_interpolation
+│       ├── __init__.py
+│       ├── langrange.py
+│       ├── newton.py
+│       └── vandermonde.py
 │
 ├── tests/
 │   ├── print_helpers.py                    ← shared print utilities
@@ -82,9 +87,13 @@ DigitalNumbers/
 │   │   ├── test_jacobi.py
 │   │   ├── test_gauss-seidel.py
 │   │   └── test_sor.py
-│   └── chapter3_open_methods/
-│       ├── test_newton.py
-│       └── test_fixed_point.py
+│   ├── chapter3_open_methods/
+│   │   └── __init__.py
+│   └── chapter4_interpolation
+│       ├── __init__.py
+│       ├── langrange.py
+│       ├── newton.py
+│       └── test_vandermonde.py
 │
 ├── pseudocode/
 │   └── pseudocode_all_methods.md
@@ -154,8 +163,6 @@ python tests/chapter2_linear_systems/test_sor.py
 ### Chapter 3 — Open Methods
 
 ```bash
-python tests/chapter3_open_methods/test_newton.py
-python tests/chapter3_open_methods/test_fixed_point.py
 ```
 
 ### Run everything at once (Mac/Linux)
@@ -190,22 +197,22 @@ A = [[2,-1,0,3],[1,0.5,3,8],[0,13,-2,11],[14,5,-2,3]],  b = [1,1,1,1]
 
 ### Inputs per method
 
-| Method                  | Inputs                                  | Expected result          |
-|-------------------------|-----------------------------------------|--------------------------|
-| Incremental Search      | `f`, `x0=-3`, `h=0.5`, `N=100`         | 32 sign-change intervals |
-| Bisection               | `f`, `a=0`, `b=1`, `tol=1e-7`, `N=100` | root ≈ 0.9364045262      |
-| False Position          | `f`, `a=0`, `b=1`, `tol=1e-7`, `N=100` | root ≈ 0.9364045809      |
-| Newton-Raphson          | `f`, `f'`, `x0=0.5`, `tol=1e-7`, `N=100` | root ≈ 0.9364045809   |
-| Fixed Point             | `g`, `x0=-0.5`, `tol=1e-7`, `N=100`    | root ≈ −0.3744450530     |
-| Secant                  | `f`, `x0=0.5`, `x1=1`, `tol=1e-7`, `N=100` | root ≈ 0.9364045809 |
-| Multiple Roots          | `h`, `h'`, `h''`, `x0=1`, `tol=1e-7`, `N=100` | root ≈ 0.0        |
-| Naive Gaussian          | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
-| Gaussian PP             | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
-| Gaussian TP             | `A`, `b`                                | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
-| LU simple               | `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
-| LU with partial pivoting| `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
-| Crout                   | `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
-| Doolittle               | `A`, `b`                                | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| Method                  | Inputs                                    | Expected result          |
+|-------------------------|-------------------------------------------|--------------------------|
+| Incremental Search      | `f`, `x0=-3`, `h=0.5`, `N=100`            | 32 sign-change intervals |
+| Bisection               | `f`, `a=0`, `b=1`, `tol=1e-7`, `N=100`    | root ≈ 0.9364045262      |
+| False Position          | `f`, `a=0`, `b=1`, `tol=1e-7`, `N=100`    | root ≈ 0.9364045809      |
+| Newton-Raphson          | `f`, `f'`, `x0=0.5`, `tol=1e-7`, `N=100`  | root ≈ 0.9364045809      |
+| Fixed Point             | `g`, `x0=-0.5`, `tol=1e-7`, `N=100`       | root ≈ −0.3744450530     |
+| Secant                  | `f`, `x0=0.5`, `x1=1`, `tol=1e-7`, `N=100`| root ≈ 0.9364045809      |
+| Multiple Roots          | `h`, `h'`, `h''`, `x0=1`, `tol=1e-7`, `N=100`| root ≈ 0.0            |
+| Naive Gaussian          | `A`, `b`                                  | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
+| Gaussian PP             | `A`, `b`                                  | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
+| Gaussian TP             | `A`, `b`                                  | x ≈ [0.038495, −0.180227, −0.309711, 0.247594] |
+| LU simple               | `A`, `b`                                  | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| LU with partial pivoting| `A`, `b`                                  | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| Crout                   | `A`, `b`                                  | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
+| Doolittle               | `A`, `b`                                  | x ≈ [0.525109, 0.255459, -0.410480, -0.281659] |
 
 
 ---
