@@ -1,48 +1,108 @@
+"""
+Gauss-Seidel Method
+====================
+Solves the linear system Ax = b iteratively.
+Unlike Jacobi, each component is updated immediately using the most
+recent values available within the same iteration.
+Converges when the spectral radius of T = -(D+L)⁻¹U is less than 1.
+Formula: x^{k+1} = T · x^k + C,   T = -(D+L)⁻¹U,   C = (D+L)⁻¹ · b
+Author: Juan Felipe Florez Giraldo
+Last updated: April 2026
+"""
+
 import numpy as np
+import pandas as pd
 
-def gauss_seidel(A, b, x0, tol, Nmax, norm_type=2):
 
-    # Convert inputs to arrays
-    A = np.array(A, dtype=float)
-    b = np.array(b, dtype=float)
-    x = np.array(x0, dtype=float)
+def gauss_seidel(A, b, x0, tol: float, n_max: int) -> dict:
+    """
+    Gauss-Seidel iterative method to solve Ax = b.
 
-    n = len(b)
+    Parameters
+    ----------
+    A     : array-like — n×n coefficient matrix
+    b     : array-like — right-hand side vector of length n
+    x0    : array-like — initial guess vector of length n
+    tol   : float      — error tolerance (stopping criterion, norm-2)
+    n_max : int        — maximum number of iterations
 
-    # Iteration counter
-    iterations = 0
+    Returns
+    -------
+    dict with keys:
+        'solution'        : np.ndarray   — approximated solution vector
+        'iters'           : int          — number of iterations performed
+        'error'           : float        — final norm-2 error
+        'table'           : pd.DataFrame — iteration table
+        'converged'       : bool         — True if tolerance was reached
+        'T'               : np.ndarray   — iteration matrix -(D+L)⁻¹U
+        'C'               : np.ndarray   — constant vector (D+L)⁻¹·b
+        'spectral_radius' : float        — spectral radius of T
 
-    # Initial error
-    error = tol + 1
+    Table columns
+    -------------
+    iter : iteration number (0 = initial guess)
+    E    : norm-2 error ||x_new - x_old||_2  (None for iter 0)
+    x1 … xn : components of the solution vector at this iteration
+    """
+    A  = np.array(A,  dtype=float)
+    b  = np.array(b,  dtype=float)
+    x  = np.array(x0, dtype=float)
+    n  = len(b)
 
-    # Gauss-Seidel iteration
-    while error > tol and iterations < Nmax:
+    # ── Iteration matrix T = -(D+L)⁻¹U and vector C = (D+L)⁻¹·b ─────────
+    D   = np.diag(np.diag(A))
+    L   = np.tril(A, -1)           # strictly lower triangular
+    U   = np.triu(A,  1)           # strictly upper triangular
+    DL  = D + L                    # (D + L)
+    DL_inv = np.linalg.inv(DL)
+    T   = -DL_inv @ U
+    C   =  DL_inv @ b
 
-        # Store previous approximation
-        x_old = x.copy()
+    # ── Spectral radius ────────────────────────────────────────────────────
+    spectral_radius = float(np.max(np.abs(np.linalg.eigvals(T))))
 
-        # Compute each component
-        for i in range(n):
+    # ── Column names for solution components ──────────────────────────────
+    x_cols = [f"x{i + 1}" for i in range(n)]
 
-            summation1 = 0
-            summation2 = 0
+    # ── Row 0 — initial guess (no error yet) ──────────────────────────────
+    rows = [{
+        "iter": 0,
+        "E": None,
+        **dict(zip(x_cols, x)),
+    }]
 
-            # Terms using updated values
-            for j in range(i):
-                summation1 += A[i, j] * x[j]
+    E = None
+    for k in range(1, n_max + 1):
+        x_new = T @ x + C
+        E     = float(np.linalg.norm(x_new - x, ord=2))
 
-            # Terms using previous values
-            for j in range(i + 1, n):
-                summation2 += A[i, j] * x_old[j]
+        rows.append({
+            "iter": k,
+            "E": E,
+            **dict(zip(x_cols, x_new)),
+        })
 
-            # Update current variable
-            x[i] = (b[i] - summation1 - summation2) / A[i, i]
+        x = x_new
 
-        # Compute error using selected norm
-        error = np.linalg.norm(x - x_old, ord=norm_type)
+        if E < tol:
+            return {
+                "solution":        x,
+                "iters":           k,
+                "error":           E,
+                "table":           pd.DataFrame(rows),
+                "converged":       True,
+                "T":               T,
+                "C":               C,
+                "spectral_radius": spectral_radius,
+            }
 
-        # Increase iteration counter
-        iterations += 1
-
-    return x, iterations, error
-    
+    return {
+        "solution":        x,
+        "iters":           n_max,
+        "error":           E,
+        "table":           pd.DataFrame(rows),
+        "converged":       False,
+        "T":               T,
+        "C":               C,
+        "spectral_radius": spectral_radius,
+    }
