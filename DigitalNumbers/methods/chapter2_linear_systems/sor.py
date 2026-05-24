@@ -1,50 +1,112 @@
+"""
+SOR Method (Successive Over-Relaxation)
+========================================
+Solves the linear system Ax = b iteratively.
+Generalises Gauss-Seidel by introducing a relaxation factor w:
+  w < 1 → under-relaxation   (improves stability)
+  w = 1 → equivalent to Gauss-Seidel
+  w > 1 → over-relaxation    (can accelerate convergence)
+Converges when the spectral radius of T = (D+wL)⁻¹((1-w)D - wU) < 1.
+Formula: x^{k+1} = T · x^k + C,
+         T = (D+wL)⁻¹((1-w)D - wU),   C = w(D+wL)⁻¹ · b
+Author: Juan Felipe Florez Giraldo
+Last updated: April 2026
+"""
+
 import numpy as np
+import pandas as pd
 
-def sor(A, b, x0, w, tol, Nmax, norm_type=2):
 
-    # Convert inputs to arrays
-    A = np.array(A, dtype=float)
-    b = np.array(b, dtype=float)
-    x = np.array(x0, dtype=float)
+def sor(A, b, x0, tol: float, w: float, n_max: int) -> dict:
+    """
+    SOR iterative method to solve Ax = b.
 
-    n = len(b)
+    Parameters
+    ----------
+    A     : array-like — n×n coefficient matrix
+    b     : array-like — right-hand side vector of length n
+    x0    : array-like — initial guess vector of length n
+    tol   : float      — error tolerance (stopping criterion, norm-2)
+    w     : float      — relaxation factor (0 < w < 2 for convergence)
+    n_max : int        — maximum number of iterations
 
-    # Iteration counter
-    iterations = 0
+    Returns
+    -------
+    dict with keys:
+        'solution'        : np.ndarray   — approximated solution vector
+        'iters'           : int          — number of iterations performed
+        'error'           : float        — final norm-2 error
+        'table'           : pd.DataFrame — iteration table
+        'converged'       : bool         — True if tolerance was reached
+        'T'               : np.ndarray   — iteration matrix (D+wL)⁻¹((1-w)D - wU)
+        'C'               : np.ndarray   — constant vector w(D+wL)⁻¹·b
+        'spectral_radius' : float        — spectral radius of T
 
-    # Initial error
-    error = tol + 1
+    Table columns
+    -------------
+    iter : iteration number (0 = initial guess)
+    E    : norm-2 error ||x_new - x_old||_2  (None for iter 0)
+    x1 … xn : components of the solution vector at this iteration
+    """
+    A  = np.array(A,  dtype=float)
+    b  = np.array(b,  dtype=float)
+    x  = np.array(x0, dtype=float)
+    n  = len(b)
 
-    # SOR iteration
-    while error > tol and iterations < Nmax:
+    # ── Iteration matrix T = (D+wL)⁻¹((1-w)D - wU) ───────────────────────
+    D      = np.diag(np.diag(A))
+    L      = np.tril(A, -1)              # strictly lower triangular
+    U      = np.triu(A,  1)              # strictly upper triangular
+    DwL    = D + w * L                   # (D + wL)
+    DwL_inv = np.linalg.inv(DwL)
+    T      = DwL_inv @ ((1 - w) * D - w * U)
+    C      = w * DwL_inv @ b
 
-        # Store previous approximation
-        x_old = x.copy()
+    # ── Spectral radius ────────────────────────────────────────────────────
+    spectral_radius = float(np.max(np.abs(np.linalg.eigvals(T))))
 
-        # Compute each component
-        for i in range(n):
+    # ── Column names for solution components ──────────────────────────────
+    x_cols = [f"x{i + 1}" for i in range(n)]
 
-            summation1 = 0
-            summation2 = 0
+    # ── Row 0 — initial guess (no error yet) ──────────────────────────────
+    rows = [{
+        "iter": 0,
+        "E": None,
+        **dict(zip(x_cols, x)),
+    }]
 
-            # Terms using updated values
-            for j in range(i):
-                summation1 += A[i, j] * x[j]
+    E = None
+    for k in range(1, n_max + 1):
+        x_new = T @ x + C
+        E     = float(np.linalg.norm(x_new - x, ord=2))
 
-            # Terms using previous values
-            for j in range(i + 1, n):
-                summation2 += A[i, j] * x_old[j]
+        rows.append({
+            "iter": k,
+            "E": E,
+            **dict(zip(x_cols, x_new)),
+        })
 
-            # Gauss-Seidel approximation
-            gs_value = (b[i] - summation1 - summation2) / A[i, i]
+        x = x_new
 
-            # Relaxation update
-            x[i] = (1 - w) * x_old[i] + w * gs_value
+        if E < tol:
+            return {
+                "solution":        x,
+                "iters":           k,
+                "error":           E,
+                "table":           pd.DataFrame(rows),
+                "converged":       True,
+                "T":               T,
+                "C":               C,
+                "spectral_radius": spectral_radius,
+            }
 
-        # Compute error using selected norm
-        error = np.linalg.norm(x - x_old, ord=norm_type)
-
-        # Increase iteration counter
-        iterations += 1
-
-    return x, iterations, error
+    return {
+        "solution":        x,
+        "iters":           n_max,
+        "error":           E,
+        "table":           pd.DataFrame(rows),
+        "converged":       False,
+        "T":               T,
+        "C":               C,
+        "spectral_radius": spectral_radius,
+    }
