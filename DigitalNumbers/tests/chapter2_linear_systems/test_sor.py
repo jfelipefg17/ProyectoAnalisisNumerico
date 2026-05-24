@@ -1,68 +1,113 @@
 """
-Test — SOR Method
-=================
-
-Runs a test case for the SOR method
-and prints the final approximation,
-number of iterations, and final error.
-
-To run:
-    python tests/chapter2_linear_systems/test_sor.py
+SOR Method (Successive Over-Relaxation)
+========================================
+Solves the linear system Ax = b iteratively.
+Generalises Gauss-Seidel by introducing a relaxation factor w:
+  w < 1 → under-relaxation   (improves stability)
+  w = 1 → equivalent to Gauss-Seidel
+  w > 1 → over-relaxation    (can accelerate convergence)
+Converges when the spectral radius of T = (D+wL)⁻¹((1-w)D - wU) < 1.
+Formula: x^{k+1} = T · x^k + C,
+         T = (D+wL)⁻¹((1-w)D - wU),   C = w(D+wL)⁻¹ · b
+Author: Juan Felipe Florez Giraldo
+Last updated: April 2026
 """
 
-import sys
-import os
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-
 import numpy as np
+import pandas as pd
 
-from methods.chapter2_linear_systems.sor import sor
 
+def sor(A, b, x0, tol: float, w: float, n_max: int, norm_type=2) -> dict:
+    """
+    SOR iterative method to solve Ax = b.
 
-# ──────────────────────────────────────────────
-# Test 1
-# ──────────────────────────────────────────────
+    Parameters
+    ----------
+    A         : array-like — n×n coefficient matrix
+    b         : array-like — right-hand side vector of length n
+    x0        : array-like — initial guess vector of length n
+    tol       : float      — error tolerance (stopping criterion)
+    w         : float      — relaxation factor (0 < w < 2 for convergence)
+    n_max     : int        — maximum number of iterations
+    norm_type : int|float  — norm used for the error (1, 2, or np.inf). Default: 2
 
-A = np.array([
-    [4, -1, 0, 3],
-    [1, 15.5, 3, 8],
-    [0, -1.3, -4, 1.1],
-    [14, 5, -2, 30]
-], dtype=float)
+    Returns
+    -------
+    dict with keys:
+        'solution'        : np.ndarray   — approximated solution vector
+        'iters'           : int          — number of iterations performed
+        'error'           : float        — final norm-2 error
+        'table'           : pd.DataFrame — iteration table
+        'converged'       : bool         — True if tolerance was reached
+        'T'               : np.ndarray   — iteration matrix (D+wL)⁻¹((1-w)D - wU)
+        'C'               : np.ndarray   — constant vector w(D+wL)⁻¹·b
+        'spectral_radius' : float        — spectral radius of T
 
-b = np.array([1, 1, 1, 1], dtype=float)
+    Table columns
+    -------------
+    iter : iteration number (0 = initial guess)
+    E    : error ||x_new - x_old|| using norm_type  (None for iter 0)
+    x1 … xn : components of the solution vector at this iteration
+    """
+    A  = np.array(A,  dtype=float)
+    b  = np.array(b,  dtype=float)
+    x  = np.array(x0, dtype=float)
+    n  = len(b)
 
-x0 = np.array([0, 0, 0, 0], dtype=float)
+    # ── Iteration matrix T = (D+wL)⁻¹((1-w)D - wU) ───────────────────────
+    D      = np.diag(np.diag(A))
+    L      = np.tril(A, -1)              # strictly lower triangular
+    U      = np.triu(A,  1)              # strictly upper triangular
+    DwL    = D + w * L                   # (D + wL)
+    DwL_inv = np.linalg.inv(DwL)
+    T      = DwL_inv @ ((1 - w) * D - w * U)
+    C      = w * DwL_inv @ b
 
-tol = 1e-7
-Nmax = 100
+    # ── Spectral radius ────────────────────────────────────────────────────
+    spectral_radius = float(np.max(np.abs(np.linalg.eigvals(T))))
 
-# Relaxation factor
-w = 1.5
+    # ── Column names for solution components ──────────────────────────────
+    x_cols = [f"x{i + 1}" for i in range(n)]
 
-norm_type = 2
+    # ── Row 0 — initial guess (no error yet) ──────────────────────────────
+    rows = [{
+        "iter": 0,
+        "E": None,
+        **dict(zip(x_cols, x)),
+    }]
 
-# Run method
-x, iterations, error = sor(
-    A,
-    b,
-    x0,
-    w,
-    tol,
-    Nmax,
-    norm_type
-)
+    E = None
+    for k in range(1, n_max + 1):
+        x_new = T @ x + C
+        E     = float(np.linalg.norm(x_new - x, ord=norm_type))
 
-# Print results
-print("\nSOR Method")
-print("===========")
+        rows.append({
+            "iter": k,
+            "E": E,
+            **dict(zip(x_cols, x_new)),
+        })
 
-print("\nSolution:")
-print(x)
+        x = x_new
 
-print("\nIterations:")
-print(iterations)
+        if E < tol:
+            return {
+                "solution":        x,
+                "iters":           k,
+                "error":           E,
+                "table":           pd.DataFrame(rows),
+                "converged":       True,
+                "T":               T,
+                "C":               C,
+                "spectral_radius": spectral_radius,
+            }
 
-print("\nError:")
-print(error)
+    return {
+        "solution":        x,
+        "iters":           n_max,
+        "error":           E,
+        "table":           pd.DataFrame(rows),
+        "converged":       False,
+        "T":               T,
+        "C":               C,
+        "spectral_radius": spectral_radius,
+    }
