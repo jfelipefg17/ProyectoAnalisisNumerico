@@ -1,106 +1,59 @@
 """
-Jacobi Method
-=============
-Solves the linear system Ax = b iteratively.
-At each step every component is updated using only values from the
-previous iteration (no in-place updates).
-Converges when the spectral radius of T = -D⁻¹(L+U) is less than 1.
-Formula: x^{k+1} = T · x^k + C,   T = -D⁻¹(L+U),   C = D⁻¹ · b
-Author: Juan Felipe Florez Giraldo
-Last updated: April 2026
+Test — Jacobi Method
+====================
+Runs the professor's test case for the Jacobi method and prints:
+  - iteration matrix T
+  - constant vector C
+  - spectral radius
+  - full iteration table
+  - final solution, iterations, and error
+To run:
+    python tests/chapter2_linear_systems/test_jacobi.py
 """
-
+ 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+ 
 import numpy as np
-import pandas as pd
-
-
-def jacobi(A, b, x0, tol: float, n_max: int, norm_type=2) -> dict:
-    """
-    Jacobi iterative method to solve Ax = b.
-
-    Parameters
-    ----------
-    A         : array-like — n×n coefficient matrix
-    b         : array-like — right-hand side vector of length n
-    x0        : array-like — initial guess vector of length n
-    tol       : float      — error tolerance (stopping criterion)
-    n_max     : int        — maximum number of iterations
-    norm_type : int|float  — norm used for the error (1, 2, or np.inf). Default: 2
-
-    Returns
-    -------
-    dict with keys:
-        'solution'        : np.ndarray   — approximated solution vector
-        'iters'           : int          — number of iterations performed
-        'error'           : float        — final norm-2 error
-        'table'           : pd.DataFrame — iteration table
-        'converged'       : bool         — True if tolerance was reached
-        'T'               : np.ndarray   — iteration matrix -D⁻¹(L+U)
-        'C'               : np.ndarray   — constant vector D⁻¹·b
-        'spectral_radius' : float        — spectral radius of T
-
-    Table columns
-    -------------
-    iter : iteration number (0 = initial guess)
-    E    : error ||x_new - x_old|| using norm_type  (None for iter 0)
-    x1 … xn : components of the solution vector at this iteration
-    """
-    A  = np.array(A,  dtype=float)
-    b  = np.array(b,  dtype=float)
-    x  = np.array(x0, dtype=float)
-    n  = len(b)
-
-    # ── Iteration matrix T = -D⁻¹(L+U) and vector C = D⁻¹·b ──────────────
-    D_inv = np.diag(1.0 / np.diag(A))
-    LU    = A - np.diag(np.diag(A))          # off-diagonal part of A
-    T     = -D_inv @ LU
-    C     =  D_inv @ b
-
-    # ── Spectral radius ────────────────────────────────────────────────────
-    spectral_radius = float(np.max(np.abs(np.linalg.eigvals(T))))
-
-    # ── Column names for solution components ──────────────────────────────
-    x_cols = [f"x{i + 1}" for i in range(n)]
-
-    # ── Row 0 — initial guess (no error yet) ──────────────────────────────
-    rows = [{
-        "iter": 0,
-        "E": None,
-        **dict(zip(x_cols, x)),
-    }]
-
-    E = None
-    for k in range(1, n_max + 1):
-        x_new = T @ x + C
-        E     = float(np.linalg.norm(x_new - x, ord=norm_type))
-
-        rows.append({
-            "iter": k,
-            "E": E,
-            **dict(zip(x_cols, x_new)),
-        })
-
-        x = x_new
-
-        if E < tol:
-            return {
-                "solution":        x,
-                "iters":           k,
-                "error":           E,
-                "table":           pd.DataFrame(rows),
-                "converged":       True,
-                "T":               T,
-                "C":               C,
-                "spectral_radius": spectral_radius,
-            }
-
-    return {
-        "solution":        x,
-        "iters":           n_max,
-        "error":           E,
-        "table":           pd.DataFrame(rows),
-        "converged":       False,
-        "T":               T,
-        "C":               C,
-        "spectral_radius": spectral_radius,
-    }
+from methods.chapter2_linear_systems.jacobi import jacobi
+ 
+# ──────────────────────────────────────────────
+# Test 1 — Professor's data
+# ──────────────────────────────────────────────
+A = np.array([
+    [4,  -1,   0,   3],
+    [1,  15.5, 3,   8],
+    [0,  -1.3, -4,  1.1],
+    [14,  5,  -2,  30],
+], dtype=float)
+ 
+b   = np.array([1, 1, 1, 1], dtype=float)
+x0  = np.array([0, 0, 0, 0], dtype=float)
+tol  = 1e-7
+Nmax = 100
+ 
+# ── Run method ────────────────────────────────
+result = jacobi(A, b, x0, tol, Nmax)
+ 
+# ── Print results ─────────────────────────────
+print("\nJacobi Method")
+print("=" * 30)
+ 
+print("\nT:")
+for row in result["T"]:
+    print(" ".join(f"{v: .6f}" for v in row))
+ 
+print("\nC:")
+print(" ".join(f"{v: .6f}" for v in result["C"]))
+ 
+print(f"\nRadio espectral:\n {result['spectral_radius']:.6f}")
+ 
+print("\nIteration table:")
+print(result["table"].to_string(index=False))
+ 
+print(f"\nSolution:   {result['solution']}")
+print(f"Iterations: {result['iters']}")
+print(f"Error:      {result['error']:.2e}")
+print(f"Converged:  {result['converged']}")
+ 
