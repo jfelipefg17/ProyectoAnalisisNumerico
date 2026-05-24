@@ -85,7 +85,7 @@ DigitalNumbers/
 │   │   ├── test_crout.py
 │   │   ├── test_doolittle.py
 │   │   ├── test_jacobi.py
-│   │   ├── test_gauss-seidel.py
+│   │   ├── test_gauss_seidel.py
 │   │   └── test_sor.py
 │   ├── chapter3_open_methods/
 │   │   └── __init__.py
@@ -156,7 +156,7 @@ python tests/chapter2_linear_systems/test_LU_partial_pivoting.py
 python tests/chapter2_linear_systems/test_crout.py
 python tests/chapter2_linear_systems/test_doolittle.py
 python tests/chapter2_linear_systems/test_jacobi.py
-python tests/chapter2_linear_systems/test_gauss-seidel.py
+python tests/chapter2_linear_systems/test_gauss_seidel.py
 python tests/chapter2_linear_systems/test_sor.py
 ```
 
