@@ -719,8 +719,8 @@ Repeat until the error is smaller than the tolerance or N iterations are reached
 >Replace the old approximation vector with the new one.
 >
 >Increase the iteration counter by one.
->
->Report the final approximation vector as the solution.
+
+Report the final approximation vector as the solution.
 
 **END**
 
