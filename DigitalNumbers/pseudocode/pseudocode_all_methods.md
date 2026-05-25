@@ -232,14 +232,8 @@ The approximate value of the root, or a message indicating that the method faile
 Start with two initial approximations x0 and x1.
 Evaluate f at both points.
 
-Compute the first estimate using the secant formula based on x0 and x1.
-
-Evaluate f at this new estimate.
-Set the initial error to a large number so the loop starts.
-
 Repeat until the error is smaller than the tolerance or N iterations are reached:
 
->Remember the previous approximation before updating it.  
 >Compute a new approximation using the secant formula with the two most recent values.
 >
 >Check that the denominator is not zero:
@@ -278,11 +272,6 @@ The approximate value of the root, or a message indicating that the method faile
 Start with an initial approximation x0.
 Evaluate f, f', and f'' at this point.
 
-Compute the first estimate using the multiple roots formula.
-
-Evaluate f at this new estimate.
-Set the initial error to a large number so the loop starts.
-
 Repeat until the error is smaller than the tolerance or N iterations are reached:
 
 >Remember the current approximation before updating it.  
@@ -296,7 +285,7 @@ Repeat until the error is smaller than the tolerance or N iterations are reached
 >Update the approximation with the new value.  
 >Increase the iteration counter by one.  
 
-Report the fina approximation as the root.
+Report the final approximation as the root.
 
 **END**
 
